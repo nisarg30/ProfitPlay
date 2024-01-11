@@ -1,0 +1,73 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added box shadow */
+}
+
+.logo-container {
+    width: auto;
+    height: 100%;
+}
+
+.logo {
+    height: 2rem;
+}
+
+.index-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem; /* Adjusted margin-left */
+    margin-right: auto;
+}
+
+.splitter {
+    margin: auto;
+}
+
+.index {
+    display: flex;
+    flex-direction: row; /* Used rem unit for margin */
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    padding: 0.4rem;
+    border-radius: 2px;
+}
+
+.index:hover {
+    cursor: grab;
+    background-color: #e6e6e6;
+}
+
+.index-label {
+    color: #000000;
+}
+
+.index-value {
+    margin-left: 0.25em; /* Used em unit for margin */
+}
+
+.index-change {
+    color: var(--color);
+}
+
+.green {
+    --color: green;
+}
+
+.red {
+    --color: red;
+}
+
+.icon-container {
+    display: flex;
+}
+
+.icon {
+    margin-right: 1rem; /* Used rem unit for margin */
+    cursor: pointer;
+}

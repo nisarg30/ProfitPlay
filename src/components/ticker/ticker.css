@@ -1,0 +1,49 @@
+.ticker {
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: row;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    height: 2.5rem;
+    width: 93%;
+    border-bottom: 1px solid #e8ebf1;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .ticker:hover {
+    background-color: #e6e6e6;
+  }
+  .stockname {
+    padding-top: 0.20rem;
+    align-self: center;
+    font-size: 0.75rem;
+    box-sizing: content-box;
+  }
+  
+  .price-container {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    box-sizing: content-box;
+  }
+  
+  .up-arrow,
+  .down-arrow {
+    margin-left: 2px;
+    font-size: 1rem;
+  }
+  
+  .up-arrow {
+    color: forestgreen;
+  }
+  
+  .down-arrow {
+    color: crimson;
+  }
+  

@@ -1,0 +1,35 @@
+@import "https://code.highcharts.com/css/stocktools/gui.css";
+@import "https://code.highcharts.com/css/annotations/popup.css";
+
+.modal {
+    background: #ffffff; /* Modal background color */
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 100;
+    margin-left: 50px;
+    box-shadow: 5px;
+}
+
+.modal-content {
+    background: #fff; /* Modal background color */
+    padding: 20px;
+    border-color: black;
+    border-width: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    margin-left: 20px;
+}
+
+.timelist {
+    cursor: pointer;
+}

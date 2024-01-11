@@ -1,0 +1,151 @@
+ul, li , h2{
+    margin: 0;
+    padding: 0;
+    align-items: flex-end;
+}
+
+.watchlist-controller {
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+    width: 16rem;
+    margin-left: 1rem;
+    background-color: #ffffff;
+}
+
+.watchlist {
+    list-style: none;
+    padding: 0;
+    /* height: 2rem; */
+}
+
+.watchlist-control-item {
+    margin: 0;
+    padding: 0;
+}
+
+.watch-button {
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+    background-color: transparent;
+    border: none;
+    cursor: grab;
+    transition: border-bottom 0.3s ease;
+}
+
+.watch-button:hover {
+    color: #3f5bd9;
+}
+
+.watch-button.active {
+    border-bottom: 2px solid #3f5bd9; /* Change the underline color for active (open) watchlist */
+    color: #3f5bd9;
+}
+
+.watchlist-control-settings {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.model-add-watchlist {
+    display: flex;
+    flex-direction: column;
+}
+
+.close-button {
+    margin-left: auto;
+    margin-bottom: 1rem;
+}
+
+.heading-container {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-left : 0.5rem;
+    margin-top:  0.5rem;
+    margin-right: 0.5rem;
+    border-bottom: 2px solid #b8b8b8;
+}
+
+.heading {
+    font-size: 1rem;
+}
+
+.content-area {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-list-name, .input-add-watchlist, .add-button {
+    margin-top: 1rem;
+}
+
+.input-add-watchlist {
+    border : none;
+    outline: none;
+    border-bottom: 2px solid #b8b8b8;
+}
+
+.add-button {
+    margin-top: 2rem;
+    background-color: #3f5bd9;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    cursor: grab;
+    width: 15rem;
+    height: 2rem;
+    border-radius: 5px;
+}
+
+.manage-container {
+    display: flex;
+}
+
+.watchlist-settings {
+    display: flex;
+    flex-direction: column;
+    width: 10rem;
+    list-style-type: none;
+}
+
+.title-watchlist {
+    font-size: 0.75rem;
+}
+
+.watchlist-settings-item {
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    width: 10rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.watchlist-name-span {
+    display: flex;
+    margin-right: auto;
+}
+
+.settings-icons-container {
+    display: flex;
+    margin-left: auto;
+    justify-content: space-between;
+}
+
+.edit-icon {
+    margin-left: 0.75rem;
+}
+
+.delete-icon {
+    margin-left: 0.25rem;
+}
