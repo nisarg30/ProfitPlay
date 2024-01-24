@@ -5,9 +5,37 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* width: 100vw; */
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Default styles for larger screens */
+html {
+  font-size: 14px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  html {
+    font-size: 12px; /* Adjust the font size for smaller screens */
+  }
+}
+
+/* Additional media queries for even smaller screens if needed */
+@media (max-width: 530px) {
+  html {
+    font-size: 8px; /* Adjust the font size for even smaller screens */
+  }
+}
+
+@media (max-width: 530px) {
+  html {
+    font-size: 6px; /* Adjust the font size for even smaller screens */
+  }
 }

@@ -1,0 +1,58 @@
+.portfolio {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.3rem;
+    margin-right: 1rem;
+    margin-top: 0.47rem;
+    font-size: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.overflow-cont {
+    height : calc(100vh - 6.5rem);
+    width : calc(100vw - 18rem);
+    overflow-x: auto;
+}
+
+.ticker-container {
+    background-color: #fff;
+}
+
+.portfolio-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.3rem;
+}
+
+.portfolio-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.portfolio-table th, .portfolio-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 2px solid #eee;
+}
+
+.overflow-cont::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255); 
+    background-color: #ffffff;
+}
+
+.overflow-cont::-webkit-scrollbar
+{
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+}
+.overflow-cont::-webkit-scrollbar-thumb
+{
+    background-color: #636060;
+    border: 1px solid #fdfdfd;
+    border-radius: 100px;
+}

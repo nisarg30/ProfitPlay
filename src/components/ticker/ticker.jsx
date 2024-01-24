@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ticker.css';
 
 const Ticker = ({ stockname, price, change, pchange }) => {
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   price = price.toFixed(2);
   change = change.toFixed(2);
   pchange = pchange.toFixed(2);
 
   return (
-    <div className='ticker'>
+    <div className='ticker'
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className='stockname'>
         <span style={{ paddingTop: '0.20rem', marginTop: 'auto', marginBottom: 'auto', fontSize: '0.75rem' }}>
           {stockname}
@@ -28,6 +42,14 @@ const Ticker = ({ stockname, price, change, pchange }) => {
           </span>
         </div>
       </div>
+      {isHovered && (
+        
+        <div className="hover-div">
+            <button className="button-buy">B</button>
+            <button className="button-sell">S</button>
+            <button className="button-chart">Chart</button>
+        </div>
+        )}
     </div>
   );
 };

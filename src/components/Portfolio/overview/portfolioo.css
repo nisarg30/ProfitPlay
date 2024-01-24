@@ -1,0 +1,39 @@
+.portfolio-cover {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+}
+
+#portfolioOverview {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+h2 {
+    color: #333;
+}
+
+.overviewItem {
+    margin-left: 1.8rem;
+    margin-right: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.label {
+    color: #666;
+}
+
+.value {
+    font-weight: bold;
+}
+
+.symbol {
+    font-size: 1.75rem;
+}

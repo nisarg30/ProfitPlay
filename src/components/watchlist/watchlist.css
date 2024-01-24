@@ -1,13 +1,12 @@
 .watchlist-container {
     margin-right: auto;
     margin-left: 1rem;
-    width: 16rem;
     justify-content: space-between;
     align-items: center;
     background-color: #ffffff;
     box-sizing: border-box;
     overflow: hidden; /* Hide content that overflows */
-    height: 100%;
+    height: auto;
   }
   
   .watchlist-list {

@@ -1,0 +1,26 @@
+/* Add your styles here */
+
+.flex {
+    display: flex;
+    margin-bottom: 0.25rem;
+}
+
+.search-container {
+    border: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    height: 1.896rem;
+    padding-left: 0.75rem;
+    margin-right: 0.5rem;
+    background-color: #fff;
+    width : 16rem;
+    font-size: 0.8rem;
+}
+
+.search-input {
+    outline: 0;
+    width: 100%;
+    font-size: 0.875rem;
+    background-color: #fff;
+    border: none;
+}

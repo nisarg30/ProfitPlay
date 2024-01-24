@@ -1,0 +1,73 @@
+.portfolio-row td {
+    font-size: 0.8rem;
+    background-color: rgb(255, 255, 255);
+    max-width: 95%;
+}
+
+.portfolio-row:hover td {
+    background-color: #eee;
+}
+
+.negative {
+    color: #e74c3c; /* Red for negative values */
+}
+
+.positive {
+    color: #048539; /* Green for positive values */
+}
+
+.portfolio-row {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.hover-div {
+    position: absolute;
+    display: flex;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    margin-left: 10%;
+    margin-bottom: auto;
+    margin-top: 0.4rem;
+    border: 0.5px solid #000000;
+}
+
+.hover-div button {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.button-buy {
+    color: #048539;
+    background-color: #ffffff;
+    border: none;
+}
+
+.button-buy:hover{
+    background-color: #048539;
+    color: #ffffff;
+}
+
+.button-sell {
+    color: #e74c3c;
+    background-color: #ffffff;
+    border: none;
+}
+
+.button-sell:hover{
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+}
+
+.button-chart {
+    color: #4f4c4c;
+    border : none;
+    background-color: #ffffff;
+}
+
+.button-chart:hover{
+    background-color: #747474;
+    color: #ffffff;
+    border: none;
+}
