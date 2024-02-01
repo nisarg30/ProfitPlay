@@ -5,6 +5,7 @@ import Watchpage from './pages/watch';
 import Portfolio from './components/Portfolio/portfolio';
 import PortfolioPage from './pages/portfolio';
 import Chart from './components/chart/chart';
+// import OrderPad from './components/orderpad/orderpad';
 function App() {
 
   return (

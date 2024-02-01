@@ -2,6 +2,7 @@
     font-size: 0.8rem;
     background-color: rgb(255, 255, 255);
     max-width: 95%;
+    height: 3rem;
 }
 
 .portfolio-row:hover td {
@@ -28,8 +29,10 @@
     left: 0;
     margin-left: 10%;
     margin-bottom: auto;
-    margin-top: 0.4rem;
+    margin-top: 0.8rem;
     border: 0.5px solid #000000;
+    padding: 0.3rem;
+    background-color: #ffffff;
 }
 
 .hover-div button {

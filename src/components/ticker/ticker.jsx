@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './ticker.css';
+import { useOrderPad } from '../../context/OrerPadContext';
 
 const Ticker = ({ stockname, price, change, pchange }) => {
 
+  const { isOrderPadVisible, showOrderPad, hideOrderPad } = useOrderPad();
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -45,8 +47,8 @@ const Ticker = ({ stockname, price, change, pchange }) => {
       {isHovered && (
         
         <div className="hover-div">
-            <button className="button-buy">B</button>
-            <button className="button-sell">S</button>
+            <button className="button-buy" onClick={showOrderPad}>B</button>
+            <button className="button-sell" onClick={showOrderPad}>S</button>
             <button className="button-chart">Chart</button>
         </div>
         )}

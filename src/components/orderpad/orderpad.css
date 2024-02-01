@@ -1,0 +1,252 @@
+.orderpad {
+    width: 100%;
+    max-width: 38rem;
+    overflow: hidden;
+    position: fixed;
+    bottom: 30%;
+    left: 50%; 
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 0.3rem;
+    z-index: 100;
+    transition-property: width;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .15s;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.index-container-pad {
+    padding: 0.5rem;
+    border: 0.5px solid #999999;
+    margin: 0.2rem;
+    margin-left: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.header-pad {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #000;
+}
+
+.button-cover, .knobs, .layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: relative;
+    width: 3.64rem; /* 78px / 14px */
+    height: 2rem; /* 36px / 14px */
+    margin-left : 12rem;
+    margin-top: 0.3rem;
+    margin-bottom: auto;
+    overflow: hidden;
+    border-radius: 100rem;
+    border: 0.2px solid #999999
+}
+
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.layer {
+    width: 100%;
+    background-color: #ffffff;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+#button-10 .knobs:before, #button-10 .knobs:after, #button-10 .knobs span {
+    position: absolute;
+    width: 1.5rem; /* 20px / 14px */
+    height: 1.5rem; /* 10px / 14px */
+    font-size: 0.8rem; /* 10px / 14px */
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0.15rem; /* 2px / 14px */
+    transition: 0.3s ease all;
+}
+
+#button-10 .knobs:before {
+    content: '';
+    left: 0.3rem; 
+    background-color: #0ba534;
+    margin-top: auto;
+    width: 1.5rem;
+    border-radius: 100rem;
+}
+
+#button-10 .knobs:after {
+    content: 'S';
+    right: 0.3rem; /* 10px / 14px */
+    color: #4e4e4e;
+    width: 1.5rem;
+    border-radius: 100rem;
+    margin-top: 0.5rem;
+}
+
+#button-10 .knobs span {
+    display: inline-block;
+    left: 0.3rem; /* 4px / 14px */
+    color: #fff;
+    z-index: 1;
+    margin-top: 0.5rem;
+}
+
+#button-10 .checkbox:checked + .knobs span {
+    color: #4e4e4e;
+}
+
+#button-10 .checkbox:checked + .knobs:before {
+    left: 1.8rem; /* 42px / 14px */
+    background-color: #F44336;
+}
+
+#button-10 .checkbox:checked + .knobs:after {
+    color: #fff;
+}
+
+#button-10 .checkbox:checked ~ .layer {
+    background-color: #ffffff;
+}
+
+.close-orderpad {
+    padding: 0.1rem;
+    margin: 0.1rem;
+    height: 2rem;
+    width: 2rem;
+    margin-left : auto;
+    margin-right: 0.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 100rem;
+    border: 0.5px solid #999999;
+    font-weight: 600;
+    font-size: 0.8rem;
+    background-color: #fff;
+}
+
+.close-orderpad:hover {
+    background-color: #ed1c1c;
+    color: #ffffff;
+}
+
+.selector {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+}
+
+.trade-selection {
+    display: flex;
+    flex-direction: column;
+}
+
+.separator {
+    display: flex;margin-left: 1rem;
+}
+
+.product-type {
+    margin-left: 1rem;
+}
+  
+.product {
+    height: 3rem;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    border: 0.5px solid #999999;
+    padding: 0.8rem;
+    font-size: 1rem;
+}
+  
+.activt{
+    height: 3rem;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    border: 0.5px solid #999999;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #c8f8d5;
+    color: #078e2b;
+    border: 0.5px solid #c8f8d5;
+  }
+
+.quantity-sel {
+    margin-left: 1rem;
+}
+
+.quantity-sel input {
+    margin-left: 1rem;
+    border: 0.5px solid #999999;
+    margin-top: 0.2rem;
+    height: 3rem;
+    width: 7rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    font-size: 1.3rem;
+}
+
+.quantity-sel input:focus-visible {
+    border: 0.5px solid #999999;
+}
+
+.price-input {
+    margin-right: 1rem;
+}
+
+.price-input input{
+    margin-left: 1rem;
+    border: 0.5px solid #999999;
+    margin-top: 0.2rem;
+    height: 3rem;
+    width: 7rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    font-size: 1.3rem;
+}
+
+.price-input input:focus-visible{
+    border: 0.5px solid #999999;
+}
+
+.balance {
+    display: flex;
+}
+
+.balance-display {
+    margin-left: 1rem;
+}
+
+.place-order {
+    float: right;
+    margin-left: auto;
+    margin-right: 1rem;
+    margin-top: auto;
+    background-color: #8ff7aa;
+    font-weight: 600;
+    color: #078e2b;
+}
+
+.place-order:hover {
+    background-color: #19a13b;
+    color: #fff;
+}
