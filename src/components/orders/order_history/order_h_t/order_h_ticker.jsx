@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./order_h_ticker.css";
 // import { useOrderPad } from "../../../context/OrerPadContext";
+import HoverDiv from "../../../hoverdiv/hoverdiv";
 
 const Ticker = () => {
 
@@ -31,12 +32,7 @@ const Ticker = () => {
       <td>Executed</td>
 
       {isHovered && (
-        
-        <div className="history-hover-div">
-            <button className="button-buy">B</button>
-            <button className="button-sell">S</button>
-            <button className="button-chart">Chart</button>
-        </div>
+        <HoverDiv />
       )}
     </tr>
   );
