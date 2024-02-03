@@ -1,10 +1,8 @@
 import './App.css';
 import React from 'react';
 import {BrowserRouter,Routes,Route} from "react-router-dom";
-import Watchpage from './pages/watch';
-import Portfolio from './components/Portfolio/portfolio';
 import PortfolioPage from './pages/portfolio';
-import Chart from './components/chart/chart';
+import OrderHistory from './components/orders/order_history/order_history';
 // import OrderPad from './components/orderpad/orderpad';
 function App() {
 
@@ -12,7 +10,7 @@ function App() {
     <div className='App' style={{ backgroundColor : '#e6e6e6', height : '100%', width : '100%' }}>
     <BrowserRouter>
     <Routes>
-    <Route path='/' element= {<PortfolioPage />} />
+    <Route path='/' element= {<OrderHistory />} />
     </Routes>
     </BrowserRouter>
     {/* <Chart /> */}

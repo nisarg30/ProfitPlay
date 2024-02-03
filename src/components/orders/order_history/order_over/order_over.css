@@ -1,0 +1,68 @@
+.order-over {
+    /* border: 1px solid #050505; */
+    margin: 1rem;
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+}
+
+.buy-cont {
+    margin-left: 1rem;
+    width: auto;
+    display: flex;
+}
+
+.buy-symbol {
+    margin: auto 1rem auto 0.5rem;
+    border-radius: 100rem;
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid #117200;
+    background-color: #117200;
+    text-align: center;
+    line-height: 2rem;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+.sell-symbol {
+    margin: auto 1rem auto 0.5rem;
+    border-radius: 100rem;
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid #ad0000;
+    background-color: #ad0000;
+    text-align: center;
+    line-height: 2rem;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+.buy-text .sell-text{
+    margin: auto 1rem auto 0;
+}
+
+.total-buy .total-sell{
+    margin : 0.5rem 0 0 0;
+}
+
+.price-transaction {
+    display: flex;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.buy-amount {
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+.sell-amount {
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+
