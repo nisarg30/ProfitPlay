@@ -8,7 +8,7 @@ const OrderHistory = () => {
             <div className="order-over">
                 <OrderOver />
             </div>
-            <div className="history-table">
+            <div className="order-history-table">
                 <OrderHistoryTable />
             </div>
         </div>

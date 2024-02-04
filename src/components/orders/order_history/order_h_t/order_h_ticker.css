@@ -1,9 +1,7 @@
 .order-history-row td {
-    font-size: 0.8rem;
     background-color: rgb(255, 255, 255);
-    max-width: 95%;
+    max-width: 90vw;
     height: 3rem;
-    padding: 0.5rem;
 }
 
 .order-history-row:hover td {
@@ -20,59 +18,4 @@
 
 .order-history-row {
     transition: background-color 0.3s ease-in-out;
-}
-
-.history-hover-div {
-    position: absolute;
-    display: flex;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    margin-left: 10%;
-    margin-bottom: auto;
-    margin-top: 0.8rem;
-    padding: 0.3rem;
-    background-color: #ffffff;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-.history-hover-div button {
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.button-buy {
-    color: #048539;
-    background-color: #ffffff;
-    border: none;
-}
-
-.button-buy:hover{
-    background-color: #048539;
-    color: #ffffff;
-}
-
-.button-sell {
-    color: #e74c3c;
-    background-color: #ffffff;
-    border: none;
-}
-
-.button-sell:hover{
-    background-color: #e74c3c;
-    color: #ffffff;
-    border: none;
-}
-
-.button-chart {
-    color: #4f4c4c;
-    border : none;
-    background-color: #ffffff;
-}
-
-.button-chart:hover{
-    background-color: #747474;
-    color: #ffffff;
-    border: none;
 }

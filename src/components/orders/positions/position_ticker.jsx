@@ -17,20 +17,22 @@ const Ticker = () => {
 
     return (
         <tr
-        className="open-orders-row"
+        className="positions-row"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{ position: "relative" }}
         >
-            <td title="TATA CONSULTANCY SERV LT">TCS</td>
-            <td>BUY / DELIEVRY</td>
-            <td>50</td>
-            <td>3,885.04 0.98%</td>
-            <td>3,550</td>
+        <td title="TATA CONSULTANCY SERV LT">TCS</td>
+        <td>BUY / DELIEVRY</td>
+        <td>50</td>
+        <td>3,550</td>
+        <td>3,550</td>
+        <td>3,885.04 0.98%</td>
+        
 
-            {isHovered && (
-                <HoverDiv />
-            )}
+        {isHovered && (
+            <HoverDiv />
+        )}
         </tr>
     );
 };

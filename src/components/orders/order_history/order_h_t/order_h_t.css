@@ -4,8 +4,10 @@
 }
 
 .history-table th, .history-table td {
-    padding: 0.5rem;
+    padding: 1rem;
     text-align: left;
     border-bottom: 2px solid #eee;
     background-color: #fff;
 }
+
+

@@ -1,0 +1,48 @@
+.open-orders-container {
+    font-size: 0.8rem;
+    height : calc(100vh - 6.5rem);
+    width : calc(100vw - 18rem);
+    overflow-y: auto;
+}
+
+.open-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.open-orders-table th, .open-orders-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #eee;
+    background-color: #fff;
+}
+
+.open-orders-table th {
+    position: sticky;
+    top : 0;
+    z-index: 2;
+}
+
+.open-orders-container::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255); 
+    background-color: #ffffff;
+}
+
+.open-orders-container::-webkit-scrollbar
+{
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+}
+.open-orders-container::-webkit-scrollbar-thumb
+{
+    background-color: #636060;
+    border: 1px solid #fdfdfd;
+    border-radius: 100px;
+}
+
+.open-orders-row td {
+    height: 3rem;
+}
+

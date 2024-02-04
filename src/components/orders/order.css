@@ -1,0 +1,23 @@
+.orders-container {
+    width: 100%;
+    margin-top: 0.47rem;
+    margin-left: 0.3rem;
+    margin-right: 1rem;
+}
+
+.order-buttons {
+    background-color: #fff;
+    margin-bottom : 0.25rem
+}
+
+.orders-container button {
+    margin-left: 1rem;
+    border: none;
+    height: 2rem;
+    background-color: #fff;
+}
+
+.orders-container button.activeButton {
+    color: blue;
+    border-bottom: 1px solid blue;
+}

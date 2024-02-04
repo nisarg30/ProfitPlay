@@ -5,7 +5,7 @@ import HoverDiv from '../hoverdiv/hoverdiv';
 
 const Ticker = ({ stockname, price, change, pchange }) => {
 
-  const { isOrderPadVisible, showOrderPad, hideOrderPad } = useOrderPad();
+  // const { isOrderPadVisible, showOrderPad, hideOrderPad } = useOrderPad();
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -47,7 +47,6 @@ const Ticker = ({ stockname, price, change, pchange }) => {
       </div>
       {isHovered && (
         < HoverDiv />
-        
         )}
     </div>
   );
