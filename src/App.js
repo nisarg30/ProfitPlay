@@ -3,6 +3,7 @@ import React from 'react';
 import {BrowserRouter,Routes,Route} from "react-router-dom";
 import PortfolioPage from './pages/portfolio';
 import Orders from './pages/orders';
+import StockChart from "./components/chart/chart.jsx"
 // import OrderPad from './components/orderpad/orderpad';
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
     <Route path='/xyz' element= {<PortfolioPage />} />
     </Routes>
     </BrowserRouter>
-    {/* <Chart /> */}
+    {/* <StockChart /> */}
     </div>
   );
 }

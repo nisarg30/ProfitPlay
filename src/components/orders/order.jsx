@@ -23,19 +23,19 @@ const OrdersContainer = () => {
             <div className="order-buttons">
             <button
                     onClick={() => setActiveComponent("OpenOrders")}
-                    className={activeComponent === "OpenOrders" ? "activeButton" : ""}
+                    className={activeComponent === "OpenOrders" ? "activeButton orders-button" : "orders-button"}
                 >
                     Open Orders
                 </button>
                 <button
                     onClick={() => setActiveComponent("Positions")}
-                    className={activeComponent === "Positions" ? "activeButton" : ""}
+                    className={activeComponent === "Positions" ? "activeButton orders-button" : "orders-button"}
                 >
                     Positions
                 </button>
                 <button
                     onClick={() => setActiveComponent("OrderHistory")}
-                    className={activeComponent === "OrderHistory" ? "activeButton" : ""}
+                    className={activeComponent === "OrderHistory" ? "activeButton orders-button" : "orders-button"}
                 >
                     Order History
                 </button>

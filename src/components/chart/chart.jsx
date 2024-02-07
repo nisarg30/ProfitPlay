@@ -57,10 +57,10 @@ const StockChart = () => {
     
     function xyz() {
         const socket = io('http://localhost:3001',{
-        query: {
-            stockname: symbol,
-            timeframe: timeFrame
-        }
+            query: {
+                stockname: symbol,
+                timeframe: timeFrame
+            }
         });
 
         socket.on('dataUpdate', (data) => {
@@ -177,6 +177,7 @@ const StockChart = () => {
             try {
                 console.log('call');
                 const result = await fetchStockData(symbol, timeFrame);
+                console.log(result);
                 setStockData(result.convert);
                 console.log(result.convert[0], result.convert[1]);
                 setVolumeData(result.vol);

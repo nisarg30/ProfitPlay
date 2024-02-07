@@ -7,17 +7,22 @@
 
 .order-buttons {
     background-color: #fff;
-    margin-bottom : 0.25rem
+    margin-bottom : 0.25rem;
 }
 
-.orders-container button {
+.order-buttons button {
+    cursor : grab;
+}
+
+.orders-button {
+    font-size: 0.8rem;
     margin-left: 1rem;
     border: none;
     height: 2rem;
     background-color: #fff;
 }
 
-.orders-container button.activeButton {
+.activeButton {
     color: blue;
     border-bottom: 1px solid blue;
 }
