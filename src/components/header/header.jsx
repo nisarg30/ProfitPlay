@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './header.css';
 
 const Header = () => {
+    const navigate = useNavigate();
+    const handlleNavigate = (state) => {
+        navigate(state)
+    }
     return (
         <div className="header">
             <div className="logo-container">
@@ -35,16 +40,16 @@ const Header = () => {
                 <div className="icon" title="Account">
                     <span>👤</span>
                 </div> */}
-                <div className="icon" title="Watchlist">
+                <div className="icon" title="Watchlist" >
                     <span>Watchlist</span>
                 </div>
-                <div className="icon" title="Portfolio">
+                <div className="icon" title="Portfolio" onClick={ () => {handlleNavigate('/portfolio')}}>
                     <span>Portfolio</span>
                 </div>
-                <div className="icon" title="Orders">
+                <div className="icon" title="Orders" onClick={ () => {handlleNavigate('/orders')}}>
                     <span>Orders</span>
                 </div>
-                <div className="icon" title="Account">
+                <div className="icon" title="Account" >
                     <span>Account</span>
                 </div>
             </div>

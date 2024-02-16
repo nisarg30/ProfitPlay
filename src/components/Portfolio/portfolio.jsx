@@ -7,7 +7,6 @@ import './portfolio.css';
 const Portfolio = () => {
     return (
         <div className="portfolio">
-            <SearchBar />
             <div className="overflow-cont">
                 <div className="portfolio-overview">
                     <PortfolioOverview />

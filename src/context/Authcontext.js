@@ -1,40 +1,60 @@
-import { createContext, useEffect, useState } from "react";
-import axios from "axios"
-import BackendLink from "../datasource/backendlink";
-const AuthContext=createContext()
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import BackendLink from '../datasource/backendlink';
 
-const AuthState= ({children})=>{
-    const [Valid,setValid] =useState(false)
-    const [LoginOpen,setLoginOpen]=useState(false)
-    const [SignOpen,setSignOpen]=useState(false)
-    const [Next,setNext]=useState("/")
-    const [Loading,setLoading]=useState(true)
+const AuthorizationContext = createContext();
 
-    useEffect(()=>{
-        if (localStorage.getItem("token")){
-                try{
-            axios
-                .post(BackendLink.jwt,{token:localStorage.getItem("token")})
-                .then(res =>{
-                setLoading(false)
-                if (res.status==200){
-                    setValid(res.data.id)
-                }
-            } )
-            .catch(err => console.error(err));}
-                catch(err){
-                console.log(err)
+export const AuthorizationProvider = ({ children }) => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate(); // Get navigate function
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            verifyToken(token);
+        } else {
+            setIsLoading(false);
+        }
+    }, []);
+
+    const verifyToken = async (token) => {
+        try {
+            const response = await axios.post(BackendLink.jwt, { token });
+            if (response.status === 200) {
+                setIsLoggedIn(true);
+            } else {
+                handleTokenVerificationFailure(); // Call function to handle failure
             }
+        } catch (error) {
+            console.error('Error verifying token:', error);
+            handleTokenVerificationFailure(); // Call function to handle failure
+        } finally {
+            setIsLoading(false);
         }
-        else{
-            setLoading(false)
-        }
-    },[])
-    
+    };
+
+    const login = async (token) => {
+        localStorage.setItem('token', token);
+        setIsLoggedIn(true);
+    };
+
+    const logout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem('token');
+    };
+
+    const handleTokenVerificationFailure = () => {
+        logout(); // Logout user
+        navigate('/login'); // Navigate to login page
+    };
+
     return (
-        <AuthContext.Provider value={{Valid,setValid,LoginOpen,setLoginOpen,SignOpen,setSignOpen,Next,setNext,Loading,setLoading}}>
+        <AuthorizationContext.Provider value={{ isLoggedIn, isLoading, login, logout }} >
             {children}
-        </AuthContext.Provider>
-    )
-}
-export {AuthState,AuthContext}
+        </AuthorizationContext.Provider>
+    );
+};
+
+export const useAuthorization = () => useContext(AuthorizationContext);

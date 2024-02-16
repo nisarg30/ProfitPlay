@@ -2,6 +2,7 @@ var BackendLink={
     login : "http://localhost:4000/",
     reg   : "http://localhost:4000/reg",
     jwt   : "http://localhost:4000/jwt",
+    data  : "http://localhost:4000/data",
     market_buy : "http://localhost:4000/market/buyorder",
     market_sell : "http://localhost:4000/market/sellorder",
     limit : "http://localhost:4000/limit",

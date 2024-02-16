@@ -5,7 +5,6 @@ import HoverDiv from "../../hoverdiv/hoverdiv";
 
 const Ticker = () => {
 
-  const { isOrderPadVisible, showOrderPad, hideOrderPad } = useOrderPad();
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {

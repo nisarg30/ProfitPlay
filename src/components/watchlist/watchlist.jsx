@@ -1,6 +1,7 @@
 import React from 'react';
 import './watchlist.css';
 import Ticker from '../ticker/ticker';
+import SearchBar from '../searchbar/searchbar';
 
 const Watchlist = () => {
     const watchlist = [

@@ -4,7 +4,7 @@
 }
 
 .position-container {
-    height : calc(100vh - 9.5rem);
+    height : calc(100vh - 9.1rem);
     width : calc(100vw - 18rem);
     overflow-y: auto;
 }
@@ -31,6 +31,10 @@
     height: 3rem;
 }
 
+.positions-row:hover td{
+    background-color: #eee;
+}
+
 .total-gain-loss {
     display: flex;
     width: 11rem;
@@ -38,7 +42,7 @@
     float: right;
     background-color: #fff;
     border: 0.5px solid #090808;
-    margin-bottom: 0.3rem;
+    /* margin-bottom: 0.3rem; */
     margin-top: 2px;
 }
 
