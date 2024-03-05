@@ -42,6 +42,7 @@
         width: 98%;
         overflow: hidden;
         margin-left: 0.2rem;
+        margin-top: 0.8rem;
     }
     
     .SearchResultItem:hover {
@@ -60,7 +61,7 @@
     }
 
     .fa-search {
-        margin: auto 0.4rem;
+        margin: auto 1rem;
     }
     
     .result-div {
@@ -72,12 +73,13 @@
 
     .buttons-selection {
         margin-left: auto;
-        font-weight: 600;
         display: flex;
+        margin-right: 0.4rem;
     }
 
     .buttons-selection button{
         font-weight: 600;
+        font-size: 0.8rem;
     }
 
     .button-add {

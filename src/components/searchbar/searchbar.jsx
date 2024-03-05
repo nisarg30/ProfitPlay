@@ -3,17 +3,64 @@ import axios from 'axios';
 import BackendLink from '../../datasource/backendlink';
 import './searchbar.css';
 import { useOrderPad } from '../../context/OrerPadContext'
+import { useAuthorization } from '../../context/Authcontext';
 
 const SearchBar = () => {
 
-    const { isOrderPadVisible, showOrderPad, hideOrderPad } = useOrderPad();
+    const { showOrderPad } = useOrderPad();
+    const { activeWatchlist, watchlists, setWatchlists } = useAuthorization();
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    const addStocks = async (stockname) => {
+        const watchf = watchlists[activeWatchlist];
+        let stocknameExists = 0;
+
+        if(watchf.length > 0){
+            stocknameExists = watchf.items.some(item => item.name === stockname);
+        }
+        if (stocknameExists) {
+            setError("stockname already exists in watchlist");
+            setTimeout(() => {
+                setError(null);
+            }, 3000);
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        const bod = {
+            token : token,
+            stockname: stockname,
+            watchlistname : watchlists[activeWatchlist].watchlist.name
+        }
+        const response = await axios.post(BackendLink.addstocktowatchlist, bod);
+        if (response.status === 200) {
+            setQuery('');
+            setResults('');
+            const updatedWatchlists = watchlists.map((watchlist, index) => {
+                if (index === activeWatchlist) {
+                    return {
+                        ...watchlist,
+                        watchlist: {
+                            ...watchlist.watchlist,
+                            array: [
+                                ...watchlist.watchlist.array,
+                                { stockname: stockname }
+                            ]
+                        }
+                    };
+                }
+                return watchlist;
+            });
+            setWatchlists(updatedWatchlists);
+        }        
+    }
 
     const fetchData = async () => {
         try {
@@ -81,9 +128,10 @@ const SearchBar = () => {
                                     <button className='button-buy' onClick={showOrderPad}>B</button>
                                     <button className='button-sell' onClick={showOrderPad}>S</button>
                                     <button className='button-chart'>Chart</button>
-                                    <button className='button-add'>+</button>
+                                    <button className='button-add' onClick={() => {addStocks(item.stockname)}}>+</button>
                                 </div>
                             </div>
+                            <span style={{'fontSize' : '0.8rem', color : 'red'}}>{error}</span>
                         </li>
                     ))}
                 </ul>

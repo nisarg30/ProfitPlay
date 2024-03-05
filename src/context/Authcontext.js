@@ -8,6 +8,8 @@ const AuthorizationContext = createContext();
 export const AuthorizationProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [watchlists, setWatchlists] = useState([]);
+    const [activeWatchlist, setActiveWatchlist] = useState(0);
     const navigate = useNavigate(); // Get navigate function
 
     useEffect(() => {
@@ -24,6 +26,7 @@ export const AuthorizationProvider = ({ children }) => {
             const response = await axios.post(BackendLink.jwt, { token });
             if (response.status === 200) {
                 setIsLoggedIn(true);
+                setWatchlists(response.data.data);
             } else {
                 handleTokenVerificationFailure(); // Call function to handle failure
             }
@@ -51,7 +54,7 @@ export const AuthorizationProvider = ({ children }) => {
     };
 
     return (
-        <AuthorizationContext.Provider value={{ isLoggedIn, isLoading, login, logout }} >
+        <AuthorizationContext.Provider value={{ isLoggedIn, isLoading, watchlists, setActiveWatchlist, activeWatchlist, setWatchlists,login, logout }} >
             {children}
         </AuthorizationContext.Provider>
     );

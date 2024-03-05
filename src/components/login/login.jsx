@@ -49,7 +49,7 @@ const Login = () => {
             if( response.status === 200 ) {
                 console.log(response.data.token);
                 login(response.data.token);
-                history('./orders');
+                history('../orders');
             } else if(response.status === 403 ) {
                 setLoginError('Invalid email or password');
             }else if(response.status === 404 ) {
