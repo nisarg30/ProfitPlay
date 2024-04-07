@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./tickerp.css";
-import { useOrderPad } from "../../../context/OrerPadContext";
-import HoverDiv from "../../hoverdiv/hoverdiv";
+import HoverDiv from "../../hoverdiv/hoverdivp";
 
-const Ticker = () => {
+const Ticker = ({ currentValues }) => { // Destructuring props here
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -22,17 +21,17 @@ const Ticker = () => {
       onMouseLeave={handleMouseLeave}
       style={{ position: "relative" }}
     >
-      <td title="TATA CONSULTANCY SERV LT">TCS</td>
-      <td>3</td>
-      <td>3,884.60</td>
-      <td>3,885.04</td>
-      <td>11,655.12</td>
-      <td>11,653.80</td>
-      <td className="negative">-1.32 (-0.01%)</td>
-      <td className="positive">+69.90 (+0.60%)</td>
+      <td>{currentValues.stockname}</td> 
+      <td>{currentValues.quantity}</td>
+      <td>{currentValues.buy_price.toFixed(2)}</td>
+      <td>100</td>
+      <td>{(currentValues.quantity * currentValues.buy_price).toFixed(2)}</td>
+      <td>{currentValues.quantity * 100}</td>
+      <td className="negative">20%</td>
+      <td className="positive">100&</td>
 
       {isHovered && (
-        <HoverDiv />
+        <HoverDiv currentValues={currentValues} />
       )}
     </tr>
   );

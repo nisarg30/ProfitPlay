@@ -4,9 +4,16 @@
 }
 
 .position-container {
-    height : calc(100vh - 9.1rem);
+    height : calc(100vh - 6.1rem);
     width : calc(100vw - 18rem);
+}
+
+.position-container-semi {
+    height : calc(100vh - 36.4rem);
+    width : calc(100vw - 18rem);
+    margin-bottom: 0.3rem;
     overflow-y: auto;
+    position: relative;
 }
 
 .positions-table {
@@ -37,7 +44,7 @@
 
 .total-gain-loss {
     display: flex;
-    width: 11rem;
+    width : calc(100vw - 18rem);
     height: 3rem;
     float: right;
     background-color: #fff;
@@ -56,21 +63,22 @@
     line-height: 1.9rem;
     box-sizing: border-box;
     text-align: center;
+    font-size: 1rem;
 }
 
-.position-container::-webkit-scrollbar-track
+.position-container-semi::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgb(255, 255, 255); 
     background-color: #ffffff;
 }
 
-.position-container::-webkit-scrollbar
+.position-container-semi::-webkit-scrollbar
 {
     width: 6px;
     height: 6px;
     background-color: #ffffff;
 }
-.position-container::-webkit-scrollbar-thumb
+.position-container-semi::-webkit-scrollbar-thumb
 {
     background-color: #636060;
     border: 1px solid #fdfdfd;

@@ -7,7 +7,7 @@ import OrdersContainer from "../components/orders/order";
 import OrderPad from "../components/orderpad/orderpad";
 import SearchBar from "../components/searchbar/searchbar";
 
-import { OrderPadProvider } from "../context/OrerPadContext";
+import { OrderPadProvider } from "../context/OrderPadContext";
 
 const Orders = () => {
     return (

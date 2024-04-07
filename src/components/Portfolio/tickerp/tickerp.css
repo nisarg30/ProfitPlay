@@ -1,7 +1,7 @@
 .portfolio-row td {
     background-color: rgb(255, 255, 255);
     max-width: 95%;
-    height: 3rem;
+    height: 3.2rem;
 }
 
 .portfolio-row:hover td {

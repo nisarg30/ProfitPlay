@@ -1,16 +1,38 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import BackendLink from '../datasource/backendlink';
+import { useWebSocket } from './WebSocketCOntext';
+import io from 'socket.io-client';
 
 const AuthorizationContext = createContext();
 
 export const AuthorizationProvider = ({ children }) => {
+
+    const { setSocket, socket } = useWebSocket();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [watchlists, setWatchlists] = useState([]);
     const [activeWatchlist, setActiveWatchlist] = useState(0);
-    const navigate = useNavigate(); // Get navigate function
+    const navigate = useNavigate();
+
+    useEffect(() => { 
+        if(!socket && isLoggedIn) {
+            const newSocket = io("http://localhost:4002");
+            setSocket(newSocket);
+            
+            newSocket.on('connect', () => {
+                newSocket.emit('joinrequest', watchlists[activeWatchlist].watchlist.array);
+            });
+        }
+
+        return () => {
+            if(socket) {
+                socket.close();
+                setSocket(null);
+            }
+        }
+    }, [isLoggedIn]);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -21,18 +43,22 @@ export const AuthorizationProvider = ({ children }) => {
         }
     }, []);
 
+    useEffect(() => {
+
+    }, [activeWatchlist]);
+
     const verifyToken = async (token) => {
         try {
             const response = await axios.post(BackendLink.jwt, { token });
-            if (response.status === 200) {
+            if (response.status == 200) {
                 setIsLoggedIn(true);
                 setWatchlists(response.data.data);
             } else {
-                handleTokenVerificationFailure(); // Call function to handle failure
+                // handleTokenVerificationFailure();
             }
         } catch (error) {
             console.error('Error verifying token:', error);
-            handleTokenVerificationFailure(); // Call function to handle failure
+            // handleTokenVerificationFailure();
         } finally {
             setIsLoading(false);
         }
@@ -49,13 +75,13 @@ export const AuthorizationProvider = ({ children }) => {
     };
 
     const handleTokenVerificationFailure = () => {
-        logout(); // Logout user
-        navigate('/login'); // Navigate to login page
+        logout();
+        navigate('/login');
     };
 
     return (
-        <AuthorizationContext.Provider value={{ isLoggedIn, isLoading, watchlists, setActiveWatchlist, activeWatchlist, setWatchlists,login, logout }} >
-            {children}
+        <AuthorizationContext.Provider value={{ isLoggedIn, isLoading, watchlists, setActiveWatchlist, activeWatchlist, setWatchlists, login, logout }} >
+            {!isLoading && children} {/* Render children only when loading is complete */}
         </AuthorizationContext.Provider>
     );
 };

@@ -1,13 +1,15 @@
 .orderpad {
     width: 100%;
-    max-width: 38rem;
+    max-width: 40rem;
     overflow: hidden;
     position: fixed;
-    bottom: 30%;
+    bottom: 40%;
     left: 50%; 
     transform: translateX(-50%);
     background-color: #fff;
     padding: 0.3rem;
+    justify-content: center;
+    align-items: center;
     z-index: 100;
     transition-property: width;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
@@ -150,6 +152,7 @@
 }
 
 .selector {
+    margin-top: 0.5rem;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #000;
@@ -230,6 +233,7 @@
 
 .balance {
     display: flex;
+    margin-top: 0.5rem;
 }
 
 .balance-display {

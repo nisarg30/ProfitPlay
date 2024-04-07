@@ -8,12 +8,11 @@
     padding-right: 0.5rem;
     height: 2.5rem;
     width: 93%;
-    border-bottom: 1px solid #e8ebf1;
     position: relative;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(255, 255, 255);
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   
   .ticker:hover {
@@ -23,7 +22,6 @@
   .stockname {
     padding-top: 0.20rem;
     align-self: center;
-    font-size: 0.75rem;
     box-sizing: content-box;
   }
   

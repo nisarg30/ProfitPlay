@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BackendLink from '../../datasource/backendlink';
 import './searchbar.css';
-import { useOrderPad } from '../../context/OrerPadContext'
+import { useOrderPad } from '../../context/OrderPadContext'
 import { useAuthorization } from '../../context/Authcontext';
+import { useWebSocket } from '../../context/WebSocketCOntext';
 
 const SearchBar = () => {
 
+    const { socket } = useWebSocket();
     const { showOrderPad } = useOrderPad();
     const { activeWatchlist, watchlists, setWatchlists } = useAuthorization();
     const [data, setData] = useState([]);
@@ -22,9 +24,12 @@ const SearchBar = () => {
         const watchf = watchlists[activeWatchlist];
         let stocknameExists = 0;
 
-        if(watchf.length > 0){
-            stocknameExists = watchf.items.some(item => item.name === stockname);
+        if(watchlists!=null && watchf.watchlist.array != undefined && watchf.watchlist.array.length > 0){
+            stocknameExists = watchf.watchlist.array.some(item => item.stockname === stockname);
         }
+
+        console.log(stocknameExists);
+
         if (stocknameExists) {
             setError("stockname already exists in watchlist");
             setTimeout(() => {
@@ -45,19 +50,20 @@ const SearchBar = () => {
             setResults('');
             const updatedWatchlists = watchlists.map((watchlist, index) => {
                 if (index === activeWatchlist) {
+                    const newArray = watchlist.watchlist.array ? [...watchlist.watchlist.array] : []; // Check if array exists
+                    newArray.push({ stockname: stockname }); // Push the new item
                     return {
                         ...watchlist,
                         watchlist: {
                             ...watchlist.watchlist,
-                            array: [
-                                ...watchlist.watchlist.array,
-                                { stockname: stockname }
-                            ]
+                            array: newArray // Update the array in the watchlist
                         }
                     };
                 }
                 return watchlist;
             });
+            
+            socket.emit('joinrequest', [ { stockname : stockname } ])
             setWatchlists(updatedWatchlists);
         }        
     }

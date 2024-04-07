@@ -21,7 +21,7 @@
 .portfolio-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 0.3rem;
+    margin-top: 0.1rem;
 }
 
 .portfolio-table thead {
@@ -29,6 +29,10 @@
     top: 0;
     background-color: #fff;
     z-index: 1;
+}
+
+.portfolio-table th {
+    height: 2.99rem;
 }
 
 .portfolio-table th, .portfolio-table td {

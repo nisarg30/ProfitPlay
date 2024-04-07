@@ -1,6 +1,6 @@
     .SearchBar {
         position: relative;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.1rem;
         margin-left: 1rem ;
     }
     
@@ -52,7 +52,7 @@
     .SearchIcon {
         margin-top: auto;
         margin-bottom: auto;
-        height: 2.3rem;
+        height: 3.25rem;
         width: 2.4rem;
         background-color: #ffffff;
         font-size: large;

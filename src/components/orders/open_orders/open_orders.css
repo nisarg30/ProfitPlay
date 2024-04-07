@@ -17,6 +17,10 @@
     background-color: #fff;
 }
 
+.open-orders-table td {
+    padding: 1.04rem;
+}
+
 .open-orders-table th {
     position: sticky;
     top : 0;

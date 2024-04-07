@@ -4,8 +4,10 @@ const OrderPadContext = createContext();
 
 export const OrderPadProvider = ({ children }) => {
     const [isOrderPadVisible, setOrderPadVisible] = useState(false);
+    const [currentValues, setCurrentValues] = useState(null); // State to hold current values
 
-    const showOrderPad = () => {
+    const showOrderPad = (values) => {
+        setCurrentValues(values);
         setOrderPadVisible(true);
     };
 
@@ -14,8 +16,8 @@ export const OrderPadProvider = ({ children }) => {
     };
 
     return (
-        <OrderPadContext.Provider value={{ isOrderPadVisible, showOrderPad, hideOrderPad }}>
-        {children}
+        <OrderPadContext.Provider value={{ isOrderPadVisible, showOrderPad, hideOrderPad, currentValues }}>
+            {children}
         </OrderPadContext.Provider>
     );
 };

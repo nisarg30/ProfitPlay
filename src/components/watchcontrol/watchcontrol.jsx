@@ -7,13 +7,12 @@ import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import Popover from '@mui/material/Popover';
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import EditIcon from '@mui/icons-material/EditOutlined';
 import { useAuthorization } from '../../context/Authcontext';
-
+import { useWebSocket } from '../../context/WebSocketCOntext';
 import BackendLink from '../../datasource/backendlink';
 
 const WatchControl = () => {
-    
+    const { socket } = useWebSocket(); 
     const { setActiveWatchlist, activeWatchlist, watchlists, setWatchlists } = useAuthorization();
     const [isAddDialogOpen, setAddDialogOpen] = useState(false);
     const [isSettingsDialogOpen, setSettingsDialogOpen] = useState(false);
@@ -27,6 +26,7 @@ const WatchControl = () => {
             setError("The maximum number of watchlists (5) has already been reached.");
             setTimeout(() => {
                 setError(null);
+                
             }, 3000);
             return;
         }
@@ -42,7 +42,6 @@ const WatchControl = () => {
     
         try {
             const token = localStorage.getItem('token');
-            console.log(token);
             const bod = {
                 token : token,
                 watchlist : newWatchlistName
@@ -61,12 +60,72 @@ const WatchControl = () => {
         }
     };
     
-
     const handleWatchlistClick = (index) => {
+        const array1 = watchlists[activeWatchlist].watchlist.array;
+        const array2 = watchlists[index].watchlist.array;
         setActiveWatchlist(index);
+
+        const uncommonArray1 = [];
+        const uncommonArray2 = [];
+
+        const map = {};
+
+        // Mark elements from array1
+        array1.forEach((obj) => {
+            const stockname = obj.stockname;
+            map[stockname] = true;
+        });
+
+        array2.forEach((obj) => {
+            const stockname = obj.stockname;
+            if (map[stockname]) {
+                delete map[stockname]; 
+            } else {
+                uncommonArray2.push(obj); 
+            }
+        });
+
+        for (const key in map) {
+            uncommonArray1.push({ stockname: key });
+        }
+
+        console.log(uncommonArray1, uncommonArray2);
+
+        socket.emit('leaverequest1', uncommonArray1);
+        socket.emit('joinrequest', uncommonArray2);
+        
         setAnchorElAdd(null);
         setAnchorElSettings(null);
     };
+
+    const deletewatchlist = async (watchlist) => {
+        const token = localStorage.getItem('token');
+        const body = {
+            token : token,
+            watchlistName : watchlist
+        }
+
+        const response = await axios.post(BackendLink.deletewatchlist, body);
+
+        if(response.status === 200) {
+            const updatedwatch = watchlists;
+            socket.emit('leaverequest', watchlists[activeWatchlist].watchlist.array);
+            if (watchlists[activeWatchlist].watchlist.name === watchlist) {
+                if(activeWatchlist == 0) {
+                    setActiveWatchlist(null);
+                }
+                else {
+                    setActiveWatchlist(activeWatchlist - 1);
+                }
+            }
+            const updatedWatchlists = watchlists.filter(item => item.watchlist.name !== watchlist);
+            
+            setWatchlists(updatedWatchlists);
+        }
+        else {
+            console.log("error");
+        }
+    }
 
     const handleSettingsClick = (event) => {
         setAnchorElSettings(event.currentTarget);
@@ -188,10 +247,9 @@ const WatchControl = () => {
                                 <ul className="watchlist-settings">
                                     {watchlists.map((watchlist, index) => (
                                         <li key={index} className="watchlist-settings-item">
-                                            <span className='watchlist-name-span'>{watchlist.name}</span>
+                                            <span className='watchlist-name-span'>{watchlist.watchlist.name}</span>
                                             <div className='settings-icons-container'>
-                                                <EditIcon className='edit-icon' style={{ cursor: 'pointer'}} fontSize='2rem'/>
-                                                <DeleteIcon className='delete-icon' style={{ cursor: 'pointer' }} fontSize='2rem'/>
+                                                <DeleteIcon className='delete-icon' style={{ cursor: 'pointer' }} fontSize='2rem' onClick={() => deletewatchlist(watchlist.watchlist.name)}/>
                                             </div>
                                         </li>
                                     ))}

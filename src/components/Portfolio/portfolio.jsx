@@ -1,10 +1,45 @@
-import React from "react";
-import SearchBar from "../searchbar/searchbar";
+import React, { useEffect, useState } from "react";
 import PortfolioOverview from "./overview/portfolioover";
 import Ticker from "./tickerp/tickerp";
 import './portfolio.css';
+import BackendLink from "../../datasource/backendlink";
+import axios from "axios";
+import io from "socket.io-client";
 
 const Portfolio = () => {
+
+    const [portfolio, setPortfolio] = useState([]);
+    const [extsocket, setExtSocket] = useState(null);
+
+    const fetchData = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await axios.post(BackendLink.portfolio, { token: token });
+            setPortfolio(response.data.portfolio);
+        } catch (error) {
+            console.error('Error fetching portfolio:', error);
+        }
+    };
+
+    useEffect(() => {
+        const newSocket = io("http://localhost:4002");
+        setExtSocket(newSocket);
+
+        return () => {
+            newSocket.close();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (extsocket) {
+            extsocket.emit('joinrequest', portfolio);
+        }
+    }, [portfolio, extsocket]);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <div className="portfolio">
             <div className="overflow-cont">
@@ -26,8 +61,8 @@ const Portfolio = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {[...Array(30)].map((_, index) => (
-                                <Ticker key={index} />
+                            {portfolio.map((item, index) => (
+                                <Ticker key={index} currentValues={item} />
                             ))}
                         </tbody>
                     </table>
