@@ -14,19 +14,13 @@ const Positions = () => {
             try {
                 const token = localStorage.getItem('token');
                 const response = await axios.post(BackendLink.positions, { token: token });
-                setopenpos(response.data.ope);
+                setopenpos(response.data.ope.log);
                 setclosepos(response.data.close);
-                
             } catch (error) {
                 console.error('Error fetching positions:', error);
             }
         };
-
         fetchData();
-
-        return () => {
-            // Any cleanup code can go here
-        };
     }, []);
 
     return (
@@ -50,7 +44,7 @@ const Positions = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {openpos.length!=0 && openpos.log.map((item, index) => (
+                            {openpos.length!=0 && openpos.map((item, index) => (
                                 <Ticker key={index} currentValues={item} />
                             ))}
                         </tbody>
@@ -74,7 +68,7 @@ const Positions = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {closepos.length!=0 && openpos.log.map((item, index) => (
+                            {closepos.length!=0 && closepos.map((item, index) => (
                                 <Ticker key={index} currentValues={item} />
                             ))}     
                         </tbody>

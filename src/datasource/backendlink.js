@@ -13,5 +13,10 @@ var BackendLink={
     deletestock : "http://localhost:4000/deletestock",
     portfolio : "http://localhost:4000/portfolio",
     positions : "http://localhost:4000/positions",
+    orderHistory : "http://localhost:4000/orderhistory",
+    openorders : "http://localhost:4000/openorders",
+    account : "http://localhost:4000/account",
+    deliveryfetch : "http://localhost:4000/deliveryfetch",
+    intradayfetch : "http://localhost:4000/intradayfetch",
 };
 export default BackendLink;

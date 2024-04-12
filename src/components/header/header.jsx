@@ -49,7 +49,7 @@ const Header = () => {
                 <div className="icon" title="Orders" onClick={ () => {handlleNavigate('/orders')}}>
                     <span>Orders</span>
                 </div>
-                <div className="icon" title="Account" >
+                <div className="icon" title="Account" onClick={ () => {handlleNavigate('/accounts')}}>
                     <span>Account</span>
                 </div>
             </div>

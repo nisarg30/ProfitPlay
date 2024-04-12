@@ -4,12 +4,12 @@
 }
 
 .position-container {
-    height : calc(100vh - 6.1rem);
+    height : calc(100vh - 6.2rem);
     width : calc(100vw - 18rem);
 }
 
 .position-container-semi {
-    height : calc(100vh - 36.4rem);
+    height : calc((100vh - 16.5rem)/2);
     width : calc(100vw - 18rem);
     margin-bottom: 0.3rem;
     overflow-y: auto;
@@ -30,7 +30,7 @@
 .positions-table th,.positions-table td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 2px solid #eee;
+    border-bottom: 0.14rem solid #eee;
     background-color: #fff;
 }
 
@@ -50,7 +50,7 @@
     background-color: #fff;
     border: 0.5px solid #090808;
     /* margin-bottom: 0.3rem; */
-    margin-top: 2px;
+    margin-top: 0.14rem;
 }
 
 .total-gain-loss span {

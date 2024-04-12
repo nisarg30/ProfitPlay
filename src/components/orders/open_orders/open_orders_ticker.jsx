@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 // import { useOrderPad } from "../../../context/OrerPadContext";
-import HoverDiv from "../../hoverdiv/hoverdiv.jsx"
+import HoverDiv from "../../hoverdiv/hoverdivp.jsx"
 
-const Ticker = () => {
+const Ticker = ({ currentValues }) => {
 
     //const { isOrderPadVisible, showOrderPad, hideOrderPad } = useOrderPad();
     const [isHovered, setIsHovered] = useState(false);
@@ -22,14 +22,14 @@ const Ticker = () => {
         onMouseLeave={handleMouseLeave}
         style={{ position: "relative" }}
         >
-            <td title="TATA CONSULTANCY SERV LT">TCS</td>
+            <td title="TATA CONSULTANCY SERV LT">{currentValues.stockname}</td>
             <td>BUY / DELIEVRY</td>
-            <td>50</td>
+            <td>{ currentValues.quantity }</td>
             <td>3,885.04 0.98%</td>
-            <td>3,550</td>
+            <td>{ currentValues.ex_price }</td>
 
             {isHovered && (
-                <HoverDiv />
+                <HoverDiv currentValues={currentValues}/>
             )}
         </tr>
     );

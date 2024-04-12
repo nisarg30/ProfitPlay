@@ -1,25 +1,44 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import "./order_h_t.css";
 import Ticker from "./order_h_ticker";
+import axios from "axios";
+import BackendLink from "../../../../datasource/backendlink";
 
 const OrderHistoryTable = () => {
+
+    const [orderHitory, setOrderHitory] = useState([]);
+
+    useEffect(() => {
+        const fetch = async () => {
+            const token = localStorage.getItem('token');
+            const response = await axios.post(BackendLink.orderHistory, { token : token });
+            if(response.status === 200) {
+                setOrderHitory(response.data.logos);
+            }
+        }
+
+        fetch();
+    },[]);
+    
     return (
         <table className="history-table">
             <thead>
                 <tr className="heading">
                     <th>Stock Name</th>
                     <th>Action/Order Type</th>
-                    <th>Exec. Quantity</th>
-                    <th>Placed Price</th>
+                    <th>Quantity</th>
                     <th>Exec. Price</th>
                     <th>LTP</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                {[...Array(30)].map((_, index) => (
-                    <Ticker key={index} />
-                ))}
+                {orderHitory.map((item, index) => {
+                    return (
+                        <Ticker key={index} currentValues={item} />
+                    )
+                })}
             </tbody>
         </table>
     )

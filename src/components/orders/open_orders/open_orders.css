@@ -13,7 +13,7 @@
 .open-orders-table th, .open-orders-table td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 2px solid #eee;
+    border-bottom: 0.14rem solid #eee;
     background-color: #fff;
 }
 

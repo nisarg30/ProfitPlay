@@ -1,0 +1,62 @@
+.total-balance-cont{
+    width: calc(100vw - 18rem);
+    background-color: white;
+    padding: 0.54rem;
+    border-radius: 0.57rem;
+    margin-top: 0.47rem;
+    margin-left: 0.3rem;
+    margin-right: 0.5rem;
+    box-sizing: border-box;
+  }
+  
+  .total-balance-header, .balance-card {
+    background-color: #F0F0F0;
+    padding: 1rem 1rem;
+    border-radius: 0.42rem;
+    margin-bottom: 0.57rem;
+  }
+  
+  .total-balance-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .name-title, .label, .amount {
+    font-weight: 500;
+  }
+  
+  .balance-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 1.42rem;
+    border: 0.07rem solid #ccc;
+    border-radius: 0.42rem;
+  }
+  
+  .check-balance {
+    position: relative;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 8.5rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.42rem;
+    padding: 0.35rem 0;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -4.28rem;
+  }
+  
+  .check-balance:hover .tooltip {
+    visibility: visible;
+  }
+
+  

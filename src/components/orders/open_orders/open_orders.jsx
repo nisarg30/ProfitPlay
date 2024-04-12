@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Ticker from "./open_orders_ticker";
-import "./open_orders.css"
+import "./open_orders.css";
+import BackendLink from "../../../datasource/backendlink";
 
 const OpenOrders = () => {
+    const [openOrders, setOpenOrders] = useState([]);
+
+    useEffect(() => {
+        const fetchOpenOrders = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.post(BackendLink.openorders, { token: token });
+                setOpenOrders(response.data.openOrders);
+            } catch (error) {
+                console.error('Error fetching open orders:', error);
+            }
+        };
+        
+        fetchOpenOrders();
+    }, []); 
+
     return (
         <div className="open-orders-container">
             <table className="open-orders-table">
@@ -16,13 +34,13 @@ const OpenOrders = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {[...Array(30)].map((_, index) => (
-                        <Ticker key={index} />
+                    {openOrders.map((item, index) => (
+                        <Ticker key={index} currentValues={item} />
                     ))}
                 </tbody>
             </table>
         </div>
     );
-}
+};
 
 export default OpenOrders;

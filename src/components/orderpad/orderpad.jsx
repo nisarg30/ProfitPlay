@@ -76,8 +76,10 @@ const OrderPad = () => {
                 }
                 setTimeout(() => {
                     setError('');
+                    setQuantity('');
+                    setPrice('');
                     hideOrderPad();
-                }, 5000);
+                }, 2000);
             }
         }
     }

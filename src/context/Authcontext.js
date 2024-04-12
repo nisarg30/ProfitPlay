@@ -17,6 +17,8 @@ export const AuthorizationProvider = ({ children }) => {
     const navigate = useNavigate();
 
     useEffect(() => { 
+
+        if( watchlists.length == 0) return;
         if(!socket && isLoggedIn) {
             const newSocket = io("http://localhost:4002");
             setSocket(newSocket);
@@ -39,6 +41,7 @@ export const AuthorizationProvider = ({ children }) => {
         if (token) {
             verifyToken(token);
         } else {
+            navigate('./login');
             setIsLoading(false);
         }
     }, []);
@@ -49,16 +52,16 @@ export const AuthorizationProvider = ({ children }) => {
 
     const verifyToken = async (token) => {
         try {
-            const response = await axios.post(BackendLink.jwt, { token });
-            if (response.status == 200) {
+            const response = await axios.post(BackendLink.jwt, { token : token });
+            if (response.status === 200) {
                 setIsLoggedIn(true);
                 setWatchlists(response.data.data);
             } else {
-                // handleTokenVerificationFailure();
+                handleTokenVerificationFailure();
             }
         } catch (error) {
             console.error('Error verifying token:', error);
-            // handleTokenVerificationFailure();
+            handleTokenVerificationFailure();
         } finally {
             setIsLoading(false);
         }
