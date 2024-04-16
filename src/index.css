@@ -15,22 +15,48 @@ code {
     monospace;
 }
 
-/* Default styles for larger screens */
 html {
   font-size: 14px;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 950px) {
   html {
-    font-size: 11px; /* Adjust the font size for smaller screens */
+    font-size: 10px; 
   }
 }
 
-/* Additional media queries for even smaller screens if needed */
+@media (max-width: 646px) {
+  html {
+    font-size: 8px; 
+  }
+}
+
 @media (max-width: 530px) {
   html {
-    font-size: 5px; /* Adjust the font size for even smaller screens */
+    font-size: 6px; 
   }
 }
 
+@media (max-width: 400px) {
+  html {
+    font-size: 4px;
+  }
+}
+
+@media (max-width: 350px) {
+  html {
+    font-size: 3px; 
+  }
+}
+
+/* @media (max-width: 270px) {
+  html {
+    font-size: 3px; 
+  }
+}
+
+@media (max-width: 200px) {
+  html {
+    font-size: 2px; 
+  }
+} */

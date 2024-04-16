@@ -40,12 +40,11 @@ const Account = () => {
                     <div className="balance-info">
                         <span className="label">Trading Balance</span>
                         <span className="amount">₹3,187.68</span>
-                        <button className="check-balance">↻<span className="tooltip">Check Updated Balance</span></button>
                     </div>
                 </div>
             </div>
             <div className="trades">
-                <div className="total-balance-cont">
+                <div className="total-balance-cont2">
                     <div className="total-balance-header">
                         <span className="name-title">Trade History by Date</span>
                     </div>

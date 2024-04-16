@@ -3,11 +3,29 @@ import axios from "axios";
 import Ticker from "./position_ticker.jsx";
 import './positions.css'
 import BackendLink from "../../../datasource/backendlink.js";
+import io from "socket.io-client"
 
 const Positions = () => {
 
     const [openpos, setopenpos] = useState([]);
     const [closepos, setclosepos] = useState([]);
+    const [extsocket, setExtSocket] = useState(null);
+
+    useEffect(() => {
+        const newSocket = io("http://localhost:4002");
+        setExtSocket(newSocket);
+
+        return () => {
+            newSocket.close();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (extsocket) {
+            if(openpos.length > 0) {  extsocket.emit('joinrequest', openpos); }
+            if(closepos.length > 0) { extsocket.emit('joinrequest', closepos); }
+        }
+    }, [openpos, closepos, extsocket]);
 
     useEffect(() => {
         const fetchData = async () => {

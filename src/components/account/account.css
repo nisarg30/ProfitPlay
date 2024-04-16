@@ -1,5 +1,17 @@
-.total-balance-cont{
+.total-balance-cont2{
     width: calc(100vw - 18rem);
+    background-color: white;
+    padding: 0.54rem;
+    border-radius: 0.57rem;
+    margin-top: 0.47rem;
+    margin-left: 0.3rem;
+    margin-right: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .total-balance-cont{
+    width: calc(100vw - 18rem);
+    height: 8rem;
     background-color: white;
     padding: 0.54rem;
     border-radius: 0.57rem;
@@ -11,7 +23,7 @@
   
   .total-balance-header, .balance-card {
     background-color: #F0F0F0;
-    padding: 1rem 1rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 0.42rem;
     margin-bottom: 0.57rem;
   }
@@ -31,7 +43,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    padding: 1.42rem;
+    padding: 1rem;
     border: 0.07rem solid #ccc;
     border-radius: 0.42rem;
   }

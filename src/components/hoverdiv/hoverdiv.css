@@ -6,16 +6,18 @@
     left: 0;
     margin-left: 10%;
     margin-bottom: auto;
-    margin-top: 0.8rem;
+    margin-top: 0.5rem;
     padding: 0.3rem;
     background-color: #ffffff;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 0.7rem rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
 .hover-div button {
     font-size: 1rem;
     font-weight: 600;
+    width: fit-content;
+    padding: 0.2rem 0.5rem;
 }
 
 .button-buy {

@@ -38,7 +38,7 @@ ul, li , h2{
 
 .watch-button.active {
     color: blue;
-    border-bottom: 1px solid blue;
+    border-bottom: 0.07rem solid blue;
 }
 
 .watchlist-control-settings {
@@ -91,7 +91,7 @@ ul, li , h2{
 .input-add-watchlist {
     border : none;
     outline: none;
-    border-bottom: 2px solid #b8b8b8;
+    border-bottom: 0.14rem solid #b8b8b8;
 }
 
 .add-button {

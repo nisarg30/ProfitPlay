@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { useOrderPad } from "../../../context/OrerPadContext";
-import HoverDiv from "../../hoverdiv/hoverdiv.jsx"
+import HoverDiv from "../../hoverdiv/hoverdivp.jsx"
 
 const Ticker = ({ currentValues }) => {
 

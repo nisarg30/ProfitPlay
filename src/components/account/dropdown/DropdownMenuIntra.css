@@ -1,0 +1,33 @@
+.intra-pop {
+    display: flex;
+}
+
+.right-partition {
+    width: 60%;
+    margin-left: 0.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+.left-partition {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-right: 0.5rem;
+}
+
+.fetch-data {
+    height: 2rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    background-color: rgb(66, 76, 255);
+    color : white;
+    border-radius: 100rem;
+    font-weight: 400;
+    border : none
+}
+
+.react-datepicker__month-container  {
+    width : 100%;
+}

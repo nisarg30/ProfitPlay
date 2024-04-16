@@ -3,9 +3,27 @@ import axios from "axios";
 import Ticker from "./open_orders_ticker";
 import "./open_orders.css";
 import BackendLink from "../../../datasource/backendlink";
+import io from "socket.io-client"
 
 const OpenOrders = () => {
+
     const [openOrders, setOpenOrders] = useState([]);
+    const [extsocket, setExtSocket] = useState(null);
+
+    useEffect(() => {
+        const newSocket = io("http://localhost:4002");
+        setExtSocket(newSocket);
+
+        return () => {
+            newSocket.close();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (extsocket) {
+            extsocket.emit('joinrequest', openOrders);
+        }
+    }, [openOrders, extsocket]);
 
     useEffect(() => {
         const fetchOpenOrders = async () => {

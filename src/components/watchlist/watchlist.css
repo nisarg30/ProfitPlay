@@ -24,14 +24,14 @@
 
   .watchlist-list::-webkit-scrollbar
   {
-	  width: 6px;
-    height: 6px;
+	  width: 0.47rem;
+    height: 0.47rem;
 	  background-color: #ffffff;
   }
   .watchlist-list::-webkit-scrollbar-thumb
   {
 	  background-color: #636060;
-	  border: 1px solid #fdfdfd;
+	  border: 0.07rem solid #fdfdfd;
     border-radius: 100px;
   }
   
