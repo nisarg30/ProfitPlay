@@ -2,18 +2,18 @@ import React from 'react';
 import './watchlist.css';
 import Ticker from '../ticker/ticker';
 import { useAuthorization } from '../../context/Authcontext';
-import { useWebSocket } from '../../context/WebSocketCOntext';
+import { UseSelector, useSelector } from 'react-redux';
 
 const Watchlist = () => {
     const { activeWatchlist, watchlists } = useAuthorization();
-    const { stockPrices } = useWebSocket();
+    const stockPrices = useSelector(state => state.stocks);
 
     if (!watchlists || watchlists.length === 0 || !watchlists[activeWatchlist]) {
         return (
             <div className="watchlist-container">
                 <div className="watchlist-content">
                     <div className="watchlist-list">
-                        Loading watchlist...
+                        No watchlist found
                     </div>
                 </div>
             </div>
@@ -39,9 +39,9 @@ const Watchlist = () => {
         <div key={index} className="watchlist-item">
             <Ticker
                 stockname={stock.stockname}
-                price={stockPrices[stock.stockname]!==undefined ? stockPrices[stock.stockname] : 0}     
-                        change={12}
-                pchange={34}
+                price={stockPrices[stock.stockname]!==undefined ? stockPrices[stock.stockname].price : 0}     
+                change={stockPrices[stock.stockname]!==undefined ? (stockPrices[stock.stockname].price - stockPrices[stock.stockname].open).toFixed(2) : 0}
+                pchange={stockPrices[stock.stockname]!==undefined ? (((stockPrices[stock.stockname].price - stockPrices[stock.stockname].open)/stockPrices[stock.stockname].open)*100).toFixed(2) : 0}
             />
         </div>
     ));

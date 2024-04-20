@@ -48,7 +48,7 @@ const Login = () => {
             console.log('Login successful!');
             if( response.status === 200 ) {
                 console.log(response.data.token);
-                setWatchlists(response.data.data);
+                setWatchlists(response.data.data !== null ?  response.data.data: []);
                 login(response.data.token);
                 history('../orders');
             } else if(response.status === 403 ) {

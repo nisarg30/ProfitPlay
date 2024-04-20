@@ -18,5 +18,9 @@ var BackendLink={
     account : "http://localhost:4000/account",
     deliveryfetch : "http://localhost:4000/deliveryfetch",
     intradayfetch : "http://localhost:4000/intradayfetch",
+    geneserve : "http://localhost:4002/general",
+    authserve : "http://localhost:4002/auth",
+    resetuser : "http://localhost:4000/resetuser",
+    deleteuser : "http://localhost:4000/deleteuser"
 };
 export default BackendLink;

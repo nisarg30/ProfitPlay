@@ -37,6 +37,7 @@
   .down-arrow {
     margin-left: 2px;
     font-size: 1rem;
+    float: right;
   }
   
   .up-arrow {

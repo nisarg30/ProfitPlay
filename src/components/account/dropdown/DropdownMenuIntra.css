@@ -1,12 +1,12 @@
 .intra-pop {
     display: flex;
+    height: calc(100vh - 35em);
 }
 
 .right-partition {
+    height: calc(100vh - 35rem);
     width: 60%;
     margin-left: 0.5rem;
-    margin-top: auto;
-    margin-bottom: auto;
 }
 
 

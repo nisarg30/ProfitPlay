@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Ticker from "./position_ticker.jsx";
+import Tickerc from "./closepost.jsx";
 import './positions.css'
-import BackendLink from "../../../datasource/backendlink.js";
 import io from "socket.io-client"
+import BackendLink from "../../../datasource/backendlink.js";
+
+import { useSelector, useDispatch } from 'react-redux';
+import { updateStockPrice } from "../../../redux/actions/actions.js";
 
 const Positions = () => {
 
-    const [openpos, setopenpos] = useState([]);
-    const [closepos, setclosepos] = useState([]);
+    const openpos = useSelector(state => state.orders.openPos);
+    const closepos = useSelector(state => state.orders.closePos);
+    const stockPrices = useSelector(state => state.stocks);
+    const dispatch = useDispatch();
+
     const [extsocket, setExtSocket] = useState(null);
 
     useEffect(() => {
-        const newSocket = io("http://localhost:4002");
+        const newSocket = io(BackendLink.geneserve);
         setExtSocket(newSocket);
+
+        newSocket.on('update', (data) => {
+            dispatch(updateStockPrice(data.stock, data.price, data.open));
+        });
 
         return () => {
             newSocket.close();
@@ -22,24 +32,10 @@ const Positions = () => {
 
     useEffect(() => {
         if (extsocket) {
-            if(openpos.length > 0) {  extsocket.emit('joinrequest', openpos); }
-            if(closepos.length > 0) { extsocket.emit('joinrequest', closepos); }
+            extsocket.emit('joinrequest', openpos);
+            extsocket.emit('joinrequest', closepos);
         }
     }, [openpos, closepos, extsocket]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.post(BackendLink.positions, { token: token });
-                setopenpos(response.data.ope.log);
-                setclosepos(response.data.close);
-            } catch (error) {
-                console.error('Error fetching positions:', error);
-            }
-        };
-        fetchData();
-    }, []);
 
     return (
         <div className="positions">
@@ -62,9 +58,14 @@ const Positions = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {openpos.length!=0 && openpos.map((item, index) => (
-                                <Ticker key={index} currentValues={item} />
-                            ))}
+                            {openpos.length !== 0 && openpos.map((item, index) => {
+                                const currentPrice = stockPrices[item.stockname].price; // Correctly compute the current price here.
+                                const change =  (stockPrices[item.stockname].price -  stockPrices[item.stockname].open).toFixed(2);
+                                const pchange = ((stockPrices[item.stockname].price -  stockPrices[item.stockname].open)/ stockPrices[item.stockname].open).toFixed(2);
+                                return (
+                                    <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change : change, pchange : pchange }} /> 
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
@@ -78,17 +79,22 @@ const Positions = () => {
                         <thead>
                             <tr className="heading">
                                 <th>Stock Name</th>
-                                <th>Action / Order Type</th>
                                 <th>Quantity</th>
-                                <th>ATP</th>
+                                <th>BUY PRICE</th>
+                                <th>SELL PRICE</th>
                                 <th>LTP</th>
                                 <th>Gain / Loss</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {closepos.length!=0 && closepos.map((item, index) => (
-                                <Ticker key={index} currentValues={item} />
-                            ))}     
+                            {closepos.length !== 0 && closepos.map((item, index) => {
+                                const currentPrice = stockPrices[item.stockname].price; // Correctly compute the current price here.
+                                const change =  (stockPrices[item.stockname].price -  stockPrices[item.stockname].open).toFixed(2);
+                                const pchange = ((stockPrices[item.stockname].price -  stockPrices[item.stockname].open)/ stockPrices[item.stockname].open*100).toFixed(2);
+                                return (
+                                    <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change : change, pchange : pchange }} /> 
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

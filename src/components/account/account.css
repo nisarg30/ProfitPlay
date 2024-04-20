@@ -11,7 +11,7 @@
 
   .total-balance-cont{
     width: calc(100vw - 18rem);
-    height: 8rem;
+    height: 10rem;
     background-color: white;
     padding: 0.54rem;
     border-radius: 0.57rem;
@@ -27,6 +27,11 @@
     border-radius: 0.42rem;
     margin-bottom: 0.57rem;
   }
+
+  .balance-card {
+    display: flex;
+    justify-content: space-around;
+  }
   
   .total-balance-header{
     display: flex;
@@ -40,12 +45,14 @@
   
   .balance-info {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background-color: white;
     padding: 1rem;
     border: 0.07rem solid #ccc;
     border-radius: 0.42rem;
+    margin-left: 1rem;
   }
   
   .check-balance {
@@ -71,4 +78,17 @@
     visibility: visible;
   }
 
-  
+  .action-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}

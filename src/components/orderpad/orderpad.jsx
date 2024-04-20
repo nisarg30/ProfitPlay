@@ -5,16 +5,23 @@ import './orderpad.css';
 import BackendLink from "../../datasource/backendlink";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+import { modifyPortfolio, processBuyTrade, processSellTrade, updateBalance, addOpenOrder } from "../../redux/actions/actions";
+import formatNumber from "../../datasource/formatter";
+
 const OrderPad = () => { 
 
+    const dispatch = useDispatch();
     const history = useNavigate();
     const { isOrderPadVisible, hideOrderPad, currentValues } = useOrderPad();
+    const stockPrices = useSelector(state => state.stocks);
     const [tradeType, setTradeType] = useState(0);
     const [quantity, setQuantity] = useState('');
     const [price, setPrice] = useState('');
     const [isBuying, setIsBuying] = useState(false);
     const [isLimit, setIsLimit] = useState(false);
     const [error, setError] = useState('');
+    const balance = useSelector(state => state.user.userBalance)
 
     if (!isOrderPadVisible) {
         return null; 
@@ -68,10 +75,44 @@ const OrderPad = () => {
             } else if( response.data.case === 1004) {
                 setError("You do not have sufficient quantity of this stock.")
             } else  if( response.data.case === 1002) {
-                if(isLimit){
+                if (isLimit) {
+                    const update = parseFloat(price) * parseFloat(quantity);
+                    dispatch(addOpenOrder(response.data.entry));
+                    console.log(response.data.entry);
                     setError("order placed successfully");
-                }
-                else {
+                } else {
+                    console.log(response.data);
+                    if (tradeType == 0) { // Assuming 0 means 'Market Order' and executes immediately
+                        const payload = {
+                            stockName: currentValues.stockname,
+                            price: response.data.price,
+                            quantity: parseInt(quantity),
+                            type: !isBuying 
+                        };
+                        console.log(payload);
+                        dispatch(modifyPortfolio(payload));
+                        dispatch(updateBalance(isBuying == false ? -(payload.price * payload.quantity) : (payload.price * payload.quantity)))
+                    }
+                    else {
+                        if(isBuying == false) {
+                            const payload = {
+                                stockname : currentValues.stockname,
+                                quantity : parseInt(quantity),
+                                buy_price : response.data.price
+                            }
+                            dispatch(processBuyTrade(payload));
+                            dispatch(updateBalance(-(payload.quantity * payload.buy_price)));
+                        }
+                        else {
+                            const payload = {
+                                stockname : currentValues.stockname,
+                                quantity : parseInt(quantity),
+                                sell_price : response.data.price
+                            }
+                            dispatch(processSellTrade(payload));
+                            dispatch(updateBalance((payload.quantity * payload.sell_price)));
+                        }
+                    }
                     setError("order executed successfully");
                 }
                 setTimeout(() => {
@@ -94,8 +135,8 @@ const OrderPad = () => {
     };
 
     const handlepriceChange = (event) => {
-        const inputValue = event.target.value.replace(/[^0-9]/g, ''); 
-        setPrice(inputValue);
+        // const inputValue = event.target.value.replace(/[^0-9]/g, ''); 
+        setPrice(event.target.value);
     };
 
     return (
@@ -103,8 +144,8 @@ const OrderPad = () => {
             <div className="header-pad">
                 <div className="index-container-pad" id="ind-cont-1">
                     <span className="index-label">{currentValues.stockname}</span>
-                    <span className="index-value green">{currentValues.price}</span>
-                    <span className="index-change green">&#9650; 446.12 (12.2%)</span>
+                    <span className="index-value green">{stockPrices[currentValues.stockname].price}</span>
+                    <span className="index-change green">&#9650; {(stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open).toFixed(2)} {((stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open)/stockPrices[currentValues.stockname].open*100).toFixed(2)} % </span>
                 </div> 
                 <div className="toggle-button">
                     <div className="button b2" id="button-10">
@@ -177,7 +218,7 @@ const OrderPad = () => {
             <div className="balance">
                 <div className="balance-display">
                     <p>Availabel Cash</p>
-                    <p>₹ 1,02,220.11</p>
+                    <p>₹ {formatNumber(balance.toFixed(2))}</p>
                 </div>
                 <button className="place-order product" onClick={placeorder}>
                     Place Order

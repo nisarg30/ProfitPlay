@@ -64,13 +64,13 @@ const DropdownMenuDel = ({ items }) => {
                 </div>
                 {additionalData && (
                     <div className="additional-data">
-                        <div className="data-table">
-                            <div className="data-header">
+                        <div className="data-header">
                                 <div className="data-cell">Date</div>
                                 <div className="data-cell">Direction</div>
                                 <div className="data-cell">Quantity</div>
                                 <div className="data-cell">Executed Price</div>
                             </div>
+                        <div className="data-table">
                             {additionalData.map((trade, idx) => (
                                 <div className="data-row" key={idx}>
                                     <div className="data-cell">{trade.date}</div>

@@ -63,7 +63,9 @@ const SearchBar = () => {
                 return watchlist;
             });
             
-            socket.emit('joinrequest', [ { stockname : stockname } ])
+            if(socket) {
+                socket.emit('joinrequest', [ { stockname : stockname } ])
+            }
             setWatchlists(updatedWatchlists);
         }        
     }

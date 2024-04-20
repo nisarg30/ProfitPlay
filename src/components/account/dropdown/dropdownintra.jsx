@@ -55,15 +55,15 @@ function DropdownMenuIntra() {
             <div className="right-partition">
                 {intradayTrades.length > 0 && (
                     <div className="trade-data">
-                        <div> Number Of Trades : {intradayTrades.length}</div>
+                        <h1> Number Of Trades : {intradayTrades.length}</h1>
+                        <div className="data-header">
+                            <div className="data-cell">Stock Name</div>
+                            <div className="data-cell">Quantity</div>
+                            <div className="data-cell">Buy Price</div>
+                            <div className="data-cell">Sell Price</div>
+                            <div className="data-cell">Realised</div>
+                        </div>
                         <div className="data-table">
-                            <div className="data-header">
-                                <div className="data-cell">Stock Name</div>
-                                <div className="data-cell">Quantity</div>
-                                <div className="data-cell">Buy Price</div>
-                                <div className="data-cell">Sell Price</div>
-                                <div className="data-cell">Realised</div>
-                            </div>
                             {intradayTrades.map((trade, idx) => (
                                 <div className="data-row" key={idx}>
                                     <div className="data-cell">{trade.stockname}</div>

@@ -26,8 +26,9 @@ const Ticker = ({currentValues}) => {
       <td title="TATA CONSULTANCY SERV LT">{currentValues.stockname}</td>
       <td>BUY / DELIEVRY</td>
       <td>{currentValues.quantity}</td>
-      <td>3,550</td>
-      <td>3,900</td>
+      <td>{currentValues.buy_price}</td>
+      <td>{currentValues.sell_price}</td>
+      <td>{ currentValues.currentPrice }</td>
       <td>Executed</td>
 
       {isHovered && (

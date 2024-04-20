@@ -2,28 +2,50 @@ import React, { useEffect, useState } from "react";
 import PortfolioOverview from "./overview/portfolioover";
 import Ticker from "./tickerp/tickerp";
 import './portfolio.css';
-import BackendLink from "../../datasource/backendlink";
-import axios from "axios";
 import io from "socket.io-client";
+import BackendLink from "../../datasource/backendlink";
+
+import { useDispatch, useSelector } from "react-redux";
+import { updateStockPrice } from "../../redux/actions/actions";
 
 const Portfolio = () => {
+    const portfolio = useSelector(state => state.user.portfolio);
+    const stockPrices = useSelector(state => state.stocks);
+    const dispatch = useDispatch();
 
-    const [portfolio, setPortfolio] = useState([]);
-    const [extsocket, setExtSocket] = useState(null);
-
-    const fetchData = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await axios.post(BackendLink.portfolio, { token: token });
-            setPortfolio(response.data.portfolio);
-        } catch (error) {
-            console.error('Error fetching portfolio:', error);
-        }
-    };
+    const [portfolioValue, setPortfolioValue] = useState(0);
+    const [currentValuePort, setCurrentValuePort] = useState(0);
+    const [totalDayChange, setTotalDayChange] = useState(0); // State for total day change
 
     useEffect(() => {
-        const newSocket = io("http://localhost:4002");
+        if(!portfolio || !stockPrices) return;
+
+        let totalPortfolioValue = 0;
+        let totalCurrentValuePort = 0;
+        let totalDayChangeValue = 0; // Accumulator for total day change
+
+        portfolio.forEach((item, index) => {
+            totalPortfolioValue += (item.buy_price * item.quantity);
+            const currentPrice = stockPrices[item.stockname]?.price || 0;
+            const dayChange = currentPrice - (stockPrices[item.stockname]?.open || 0);
+            totalDayChangeValue += dayChange; // Accumulate day change
+            totalCurrentValuePort += (currentPrice * item.quantity);
+        });
+
+        setPortfolioValue(totalPortfolioValue);
+        setCurrentValuePort(totalCurrentValuePort);
+        setTotalDayChange(totalDayChangeValue); // Update total day change state
+    }, [portfolio, stockPrices]);
+
+    const [extsocket, setExtSocket] = useState(null);
+
+    useEffect(() => {
+        const newSocket = io(BackendLink.geneserve);
         setExtSocket(newSocket);
+
+        newSocket.on('update', (data) => {
+            dispatch(updateStockPrice(data.stock, data.price, data.open));
+        });
 
         return () => {
             newSocket.close();
@@ -36,15 +58,11 @@ const Portfolio = () => {
         }
     }, [portfolio, extsocket]);
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     return (
         <div className="portfolio">
             <div className="overflow-cont">
                 <div className="portfolio-overview">
-                    <PortfolioOverview />
+                    <PortfolioOverview invest={portfolioValue} currnt={currentValuePort} totalDayChange={totalDayChange} /> {/* Pass totalDayChange as prop */}
                 </div>
                 <div className="ticker-container">
                     <table className="portfolio-table">
@@ -61,9 +79,14 @@ const Portfolio = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {portfolio.map((item, index) => (
-                                <Ticker key={index} currentValues={item} />
-                            ))}
+                            {portfolio.map((item, index) => {
+                                const currentPrice = stockPrices[item.stockname]?.price || 0;
+                                const change = (currentPrice - stockPrices[item.stockname]?.open || 0).toFixed(2);
+                                const pchange = ((currentPrice - stockPrices[item.stockname]?.open || 0) / (stockPrices[item.stockname]?.open || 1) * 100).toFixed(2);
+                                return (
+                                    <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change: change, pchange: pchange }} />
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>

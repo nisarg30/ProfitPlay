@@ -32,10 +32,7 @@
     text-align: left;
     border-bottom: 0.14rem solid #eee;
     background-color: #fff;
-}
-
-.positions-row td{
-    height: 3rem;
+    height : 3rem;
 }
 
 .positions-row:hover td{
