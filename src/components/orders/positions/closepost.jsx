@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { useOrderPad } from "../../../context/OrerPadContext";
 import HoverDiv from "../../hoverdiv/hoverdivp.jsx"
+import formatNumber from "../../../datasource/formatter.js";
 
 const Tickerc = ({ currentValues }) => {
 
@@ -23,12 +23,12 @@ const Tickerc = ({ currentValues }) => {
         onMouseLeave={handleMouseLeave}
         style={{ position: "relative" }}
         >
-            <td title="TATA CONSULTANCY SERV LT">{currentValues.stockname}</td>
-            <td>{currentValues.quantity}</td>
-            <td>{currentValues.buy_price.toFixed(2)}</td>
-            <td>{currentValues.sell_price.toFixed(2)}</td>
-            <td>{currentValues.currentPrice}</td>
-            <td>{ gain.toFixed(2) }   { gainp.toFixed(2) }% </td>
+            <td>{currentValues.stockname}</td>
+            <td>{formatNumber(currentValues.quantity)}</td>
+            <td>{formatNumber(currentValues.buy_price.toFixed(2))}</td>
+            <td>{formatNumber(currentValues.sell_price.toFixed(2))}</td>
+            <td>{formatNumber(currentValues.currentPrice)}</td>
+            <td>{ formatNumber(gain.toFixed(2)) }   { gainp.toFixed(2) }% </td>
         
         {isHovered && (
             <HoverDiv currentValues={currentValues}/>

@@ -28,8 +28,8 @@ export const WebSocketProvider = ({ children }) => {
                     quantity: data.quantity,
                     type: data.direction == 0 ? true : false
                 };
-                const updateBalance = (data.quantity * data.ex_price);
-                dispatch(updateBalance(data.direction == 0 ? -updateBalance : updateBalance));
+                const updatedBalance = (data.quantity * data.ex_price);
+                dispatch(updateBalance(data.direction == 0 ? -updatedBalance : updatedBalance));
                 dispatch(deliveryLimitPostExec(payload));
             }
             else {

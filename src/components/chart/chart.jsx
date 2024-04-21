@@ -1,6 +1,6 @@
 import './chart.css';
 import React, { useEffect, useState, useRef } from 'react';
-import Highcharts from "highcharts/highstock";
+import Highcharts, { chart } from "highcharts/highstock";
 
 import indicatorsAll from "highcharts/indicators/indicators-all";
 import annotationsAdvanced from "highcharts/modules/annotations-advanced";
@@ -14,6 +14,7 @@ import io from 'socket.io-client';
 import SearchBar from './c_util/sb';
 import TimeframeSelector from './c_util/tf';
 import fetchStockData from './c_util/fetch';
+import Header from '../header/header';
 // Initialize the required modules
 indicatorsAll(Highcharts);
 annotationsAdvanced(Highcharts);
@@ -48,12 +49,38 @@ class ErrorBoundary extends React.Component {
 const StockChart = () => {
 
     //prop setup
-
-    const [timeFrame, setTimeFrame] = useState('1');
-    const [symbol, setSymbol] = useState('reliance');
+    const bbb = localStorage.getItem('chart_tf');
+    const [timeFrame, setTimeFrame] = useState(bbb != undefined ? bbb : "1D");
+    const aaa = localStorage.getItem('chart_stock');
+    const [symbol, setSymbol] = useState(aaa != undefined ? aaa : "reliance");
     const [stockData, setStockData] = useState([]);
     const [volumeData, setVolumeData] = useState([]);
+    const [xsocket, setSocket] = useState(null);
     const chartRef = useRef(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+            if(xsocket) {
+                console.log("disconnecting");
+                xsocket.close();
+                setSocket(null);
+                xyz();
+            }
+
+            try {
+                const result = await fetchStockData(symbol, timeFrame);
+                setStockData(result.convert);
+                setVolumeData(result.vol);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+
+        return () => {
+        }
+    }, [symbol, timeFrame]);
     
     function xyz() {
         const socket = io('http://localhost:3001',{
@@ -62,8 +89,12 @@ const StockChart = () => {
                 timeframe: timeFrame
             }
         });
+        setSocket(socket);
 
         socket.on('dataUpdate', (data) => {
+            if (!chartRef.current || !chartRef.current.chart) {
+                return; // Exit the function if chartRef.current or chartRef.current.chart is null
+            }
             if(chartRef.current.chart.series[0].data.length > 0) {
                 const len = chartRef.current.chart.series[0].data.length;
                 const point = chartRef.current.chart.series[0].data[len-1];
@@ -99,9 +130,10 @@ const StockChart = () => {
         });
         return () => {
             console.log('Disconnecting socket');
-            socket.disconnect();
+            socket.close();
         };
     }
+
     function abc(width, height, point) {
         const chart = chartRef.current.chart;
         let position;
@@ -128,6 +160,7 @@ const StockChart = () => {
 
         return position;
     }
+    
     function getOptions(elements) {
         var options = [],
             userOptions;
@@ -170,24 +203,6 @@ const StockChart = () => {
         console.log('handle clear');
         localStorage.removeItem('customStockToolsChart');
     }
-
-    useEffect(() => {
-    
-        const fetchData = async () => {
-            try {
-                console.log('call');
-                const result = await fetchStockData(symbol, timeFrame);
-                console.log(result);
-                setStockData(result.convert);
-                console.log(result.convert[0], result.convert[1]);
-                setVolumeData(result.vol);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        
-        fetchData();
-    }, [symbol, timeFrame]);
 
     try {
         var chartOptions = {};
@@ -260,7 +275,7 @@ const StockChart = () => {
                 series:
                     [{
                         type: 'candlestick',
-                        name: '',
+                        name: `${symbol} ${timeFrame}`,
                         data: stockData,
                         dataGrouping: {
                             enabled: false
@@ -364,6 +379,11 @@ const StockChart = () => {
                     selected: 0, // Set "day" as the default
                     buttons: [
                         {
+                            type: 'all',
+                            count: 1,
+                            text: 'all',
+                        },
+                        {
                             type: 'hour',
                             count: 4,
                             text: '4h',
@@ -408,24 +428,27 @@ const StockChart = () => {
     const containerProps = {
         style: {
             width: '100%',
-            height: '95vh',
+            height: 'calc(100vh - 7rem)', // Set height based on visibility
+            overflow: 'hidden', // Hide overflow when chart is closed
+            transition: 'height 0.5s', // Add a smooth transition
         },
     };
 
     return (
         <ErrorBoundary>
-            <div>
-                <div style={{display : 'flex', flexDirection : 'row'}}>
-                    <SearchBar symbol={symbol} setSymbol={setSymbol}/>
-                    <TimeframeSelector timeframe={timeFrame} setTimeframe={setTimeFrame}/>
-                </div>
-                <HighchartsReact 
-                    highcharts={Highcharts} 
-                    options={chartOptions} 
-                    constructorType={'stockChart'}
-                    containerProps={containerProps} 
-                    ref={chartRef} />
-            </div>
+                    <div>
+                        <Header />
+                        <div style={{display : 'flex', flexDirection : 'row'}}>
+                            <SearchBar symbol={symbol} setSymbol={setSymbol}/>
+                            <TimeframeSelector timeframe={timeFrame} setTimeframe={setTimeFrame}/>
+                        </div>
+                        <HighchartsReact 
+                            highcharts={Highcharts} 
+                            options={chartOptions} 
+                            constructorType={'stockChart'}
+                            containerProps={containerProps} 
+                            ref={chartRef} />
+                        </div>
         </ErrorBoundary>
     );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useOrderPad } from "../../context/OrderPadContext";
 import './orderpad.css';
@@ -23,9 +23,55 @@ const OrderPad = () => {
     const [error, setError] = useState('');
     const balance = useSelector(state => state.user.userBalance)
 
+    useEffect(() => {
+        if (currentValues) {
+            setIsBuying(currentValues.isBuy);
+        }
+    }, [currentValues]); 
+
     if (!isOrderPadVisible) {
         return null; 
     }
+
+    const currentDate = new Date();
+    const currentDay = currentDate.getDay(); // Sunday is 0, Monday is 1, ..., Saturday is 6
+    const currentHour = currentDate.getHours();
+    const isMarketOpen = currentDay > 0 && currentDay < 6 && currentHour >= 9 && currentHour < 15; // Assuming market hours from 9:00 AM to 3:00 PM
+
+    // if (!isMarketOpen) {
+    //     return (
+    //         <div className="orderpad">
+    //             <p className="market-closed">Indian markets are closed. Please try again during market hours.</p>
+    //         </div>
+    //     );
+    // }
+
+    if (!isOrderPadVisible) {
+        return null; 
+    }
+
+    const renderPriceInput = () => {
+        if (isLimit) {
+            return (
+                <div className="price-input">
+                    <p className="product-type">Price</p>
+                    <input
+                        type="number"
+                        value={price}
+                        onChange={handlepriceChange}
+                        placeholder="0"
+                    />
+                </div>
+            );
+        } else {
+            return (
+                <div className="price-input">
+                    <p className="product-type">Live Price</p>
+                    <p className="product-type" style={{marginTop : '2rem'}}>{formatNumber(stockPrices[currentValues.stockname].price)}</p>
+                </div>
+            );
+        }
+    };
 
     const handleCheckboxChange = (event) => {
         setIsBuying(event.target.checked);
@@ -144,8 +190,10 @@ const OrderPad = () => {
             <div className="header-pad">
                 <div className="index-container-pad" id="ind-cont-1">
                     <span className="index-label">{currentValues.stockname}</span>
-                    <span className="index-value green">{stockPrices[currentValues.stockname].price}</span>
-                    <span className="index-change green">&#9650; {(stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open).toFixed(2)} {((stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open)/stockPrices[currentValues.stockname].open*100).toFixed(2)} % </span>
+                    <span className="index-value green">{formatNumber(stockPrices[currentValues.stockname].price)}</span>
+                    <span className="index-change green">&#9650; 
+                    {formatNumber((stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open).toFixed(2))} 
+                    {((stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open)/stockPrices[currentValues.stockname].open*100).toFixed(2)} % </span>
                 </div> 
                 <div className="toggle-button">
                     <div className="button b2" id="button-10">
@@ -205,15 +253,7 @@ const OrderPad = () => {
                         placeholder="0"
                     />
                 </div>
-                <div className="price-input">
-                    <p className="product-type">Price</p>
-                    <input
-                        type="number"
-                        value={price}
-                        onChange={handlepriceChange}
-                        placeholder="0"
-                    />
-                </div>
+                {renderPriceInput()}
             </div>
             <div className="balance">
                 <div className="balance-display">

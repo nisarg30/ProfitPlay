@@ -1,91 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
-import FormControl from '@mui/material/FormControl';
+import BackendLink from '../../../datasource/backendlink';
+import './sb.css'
 
-const SearchBar = ({symbol, setSymbol}) => {
-  const [stockNames, setStockNames] = useState([]);
+const SearchBar = ({ symbol, setSymbol }) => {
 
-  const fetchStockNames = async () => {
-    try {
-      const apiUrl = `http://localhost:3001/data`;
-      const response = await axios.get(apiUrl);
-      const data = response.data;
+    const [data, setData] = useState([]);
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+    const [error, setError] = useState('');
 
-      setStockNames(data);
-    } catch (error) {
-      console.error('Error fetching stock names:', error);
-    }
-  };
-
-  useEffect(() => {
     const fetchData = async () => {
-      await fetchStockNames();
+        try {
+            const response = await axios.post(BackendLink.data, { msg: "send data" });
+            setData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     };
 
-    fetchData();
-  }, []);
+    useEffect(() => {
+      fetchData();
+    }, []);
 
-  const handleStockSelection = (event, value) => {
-    setSymbol(value);
-  };
+    const handleInputChange = (e) => {
+        const inputValue = e.target.value;
+        setQuery(inputValue.toUpperCase());
+        filterResults(inputValue);
+    };
 
-  return (
-    <FormControl style={{ width: '300px', height: '30px', marginTop: '2px', marginLeft: '10px', marginBottom: '2px' }}>
-      <Autocomplete
-        id="searchBar"
-        freeSolo={false}
-        options={stockNames.map((option) => option.stockname)}
-        value={symbol}
-        onChange={handleStockSelection}
-        sx={{
-          width: '100%',
-          height: '100%',
-          '& .MuiFormControl-root': {
-            color: 'red',
-            fontSize: '12px',
-            lineHeight: 0.5,
-            padding: 0,
-          },
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Stock Name"
-            variant="outlined"
-            sx={{
-              width: '100%',
-              height: '100%',
-              '& .MuiInputLabel-root': {
-                color: 'red',
-                fontSize: '12px',
-                lineHeight: 0.5,
-                padding: 0,
-              },
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: 'blue',
-                  borderWidth: '2px',
-                  height: '30px',
-                  padding: 0,
-                },
-                '&:hover fieldset': {
-                  borderColor: 'green',
-                  height: '30px',
-                  padding: 0,
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: 'purple',
-                  padding: 0,
-                },
-              },
-            }}
-          />
-        )}
-      />
-    </FormControl>
-  );
+    const filterResults = (inputValue) => {
+        if (!inputValue) {
+            setResults([]);
+            return;
+        }
+
+        const filteredResults = data.filter((item) => {
+            if (typeof item.stockname === 'string') {
+                return item.stockname.toLowerCase().includes(inputValue.toLowerCase());
+            }
+            return false;
+        });
+        setResults(filteredResults);
+    };
+
+    const handleResultClick = (stockname) => {
+        console.log(stockname);
+        localStorage.setItem('chart_stock', stockname);
+        setQuery('');
+        setSymbol(stockname);
+        setResults([]);
+    };
+
+    return (
+        <div className="SearchBar">
+            <div className="searchcont">
+                <input
+                    className="SearchBarInput"
+                    type="text"
+                    value={query}
+                    onChange={handleInputChange}
+                    placeholder="Search..."
+                />
+                <div className="SearchIcon">
+                    <i className="fa fa-search" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            {results.length > 0 && (
+                <ul className="SearchResults">
+                    {results.map((item) => (
+                        <li
+                            key={item._id}
+                            className="SearchResultItem"
+                        >
+                            <div className='result-div' onClick={() => handleResultClick(item.stockname)}>
+                                <div className="xyz"
+                                    >
+                                    {item.stockname}
+                                </div>
+                            </div>
+                            <span style={{'fontSize' : '0.8rem', color : 'red'}}>{error}</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
 };
 
 export default SearchBar;

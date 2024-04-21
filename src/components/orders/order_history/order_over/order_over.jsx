@@ -1,7 +1,8 @@
 import React from "react";
 import './order_over.css'
+import formatNumber from "../../../../datasource/formatter";
 
-const OrderOver = () => {
+const OrderOver = ({ totalbuy, totalsell }) => {
     return (
         <div className="order-over">
             <div className="buy-cont">
@@ -11,8 +12,7 @@ const OrderOver = () => {
                 <div className="buy-text">
                     <div className="total-buy">Total Buy</div>
                     <div className="price-transaction">
-                        <div className="buy-amount">&#8377;46,150.00</div>
-                        <div className="buy-transaction">1 Transaction</div>
+                        <div className="buy-amount">&#8377;{formatNumber(totalbuy.toFixed(2))}</div>
                     </div>
                 </div>
             </div>
@@ -23,8 +23,7 @@ const OrderOver = () => {
                 <div className="sell-text">
                     <div className="total-sell">Total SELL</div>
                     <div className="price-transaction">
-                        <div className="sell-amount">&#8377;46,150.00</div>
-                        <div className="sell-transaction">1 Transaction</div>
+                        <div className="sell-amount">&#8377;{formatNumber(totalsell.toFixed(2))}</div>
                     </div>
                 </div>
             </div>

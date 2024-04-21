@@ -7,10 +7,11 @@ const TimeframeSelector = ({ timeframe, setTimeframe }) => {
 
     const handleChange = (event) => {
         setTimeframe(event.target.value);
+        localStorage.setItem('chart_tf', event.target.value);
     };
     return (
-        <FormControl style={{ width: '150px', marginTop: '2px', marginLeft: '10px', marginBottom: '2px'}}>
-        <Select style={{ height: '30px', fontSize: '12px', backgroundColor: '#ffffff'}}
+        <FormControl style={{ width: '10.71rem', marginTop: '0.14rem', marginLeft: '0.7rem', marginBottom: '0.14rem'}}>
+        <Select style={{ height: '2.14rem', fontSize: '1rem', backgroundColor: '#ffffff'}}
             value={timeframe}
             onChange={handleChange}
         >

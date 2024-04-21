@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './header.css';
 import { useSelector } from 'react-redux';
 import { useWebSocket } from '../../context/WebSocketCOntext';
+import formatNumber from '../../datasource/formatter';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -28,16 +29,16 @@ const Header = () => {
             <div className="index-container">
                 <div className="index" id="ind-cont-1">
                     <span className="index-label">BANKNIFTY</span>
-                    <span className="index-value green">{stockPrices['BANKNIFTY'] != null ? stockPrices['BANKNIFTY'].price : 0}&nbsp;</span>
-                    <span className="index-change green">&#9650;&nbsp;{stockPrices['BANKNIFTY'] != null ? (stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open).toFixed(2) : 0}&nbsp;&nbsp;({stockPrices['BANKNIFTY'] != null ? (((stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open)/ stockPrices['BANKNIFTY'].open)*100).toFixed(2) : 0} %)</span>
+                    <span className="index-value green">{formatNumber(stockPrices['BANKNIFTY'] != null ? stockPrices['BANKNIFTY'].price : 0)}&nbsp;</span>
+                    <span className="index-change green">&#9650;&nbsp;{stockPrices['BANKNIFTY'] != null ? formatNumber((stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open).toFixed(2)) : 0}&nbsp;&nbsp;({stockPrices['BANKNIFTY'] != null ? (((stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open)/ stockPrices['BANKNIFTY'].open)*100).toFixed(2) : 0} %)</span>
                 </div>
                 <div className='splitter'>
                     <span className='splitter1'> | </span>
                 </div>
                 <div className="index" id="ind-cont-2">
                     <span className="index-label">NIFTY</span>
-                    <span className="index-value red">{stockPrices['NIFTY'] != null ? stockPrices['NIFTY'].price : 0}</span>
-                    <span className="index-change red">&#9650;&nbsp;{stockPrices['NIFTY'] != null ? (stockPrices['NIFTY'].price - stockPrices['NIFTY'].open).toFixed(2) : 0}&nbsp;&nbsp;({stockPrices['NIFTY'] != null ? ((stockPrices['NIFTY'].price - stockPrices['NIFTY'].open)/ stockPrices['NIFTY'].open*100).toFixed(2) : 0} %)</span>
+                    <span className="index-value red">{stockPrices['NIFTY'] != null ? formatNumber(stockPrices['NIFTY'].price) : 0}</span>
+                    <span className="index-change red">&#9650;&nbsp;{stockPrices['NIFTY'] != null ? formatNumber((stockPrices['NIFTY'].price - stockPrices['NIFTY'].open).toFixed(2)) : 0}&nbsp;&nbsp;({stockPrices['NIFTY'] != null ? ((stockPrices['NIFTY'].price - stockPrices['NIFTY'].open)/ stockPrices['NIFTY'].open*100).toFixed(2) : 0} %)</span>
                 </div>
             </div>
             <div className="icon-container">
@@ -53,8 +54,8 @@ const Header = () => {
                 <div className="icon" title="Account">
                     <span>👤</span>
                 </div> */}
-                <div className="icon" title="Watchlist" >
-                    <span>Watchlist</span>
+                <div className="icon" title="Watchlist" onClick={ () => {handlleNavigate('/charts')}}>
+                    <span>Charts</span>
                 </div>
                 <div className="icon" title="Portfolio" onClick={ () => {handlleNavigate('/portfolio')}}>
                     <span>Portfolio</span>

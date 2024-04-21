@@ -14,6 +14,7 @@ const OrderHistoryTable = () => {
     const stockPrices = useSelector(state => state.stocks);
     const dispatch = useDispatch();
     const [extsocket, setExtSocket] = useState(null);
+    const [totalBuy, setTotalBuy] = useState(0);
 
     useEffect(() => {
         const newSocket = io(BackendLink.geneserve);
@@ -53,7 +54,7 @@ const OrderHistoryTable = () => {
                         const change =  (stockPrices[item.stockname].price -  stockPrices[item.stockname].open).toFixed(2);
                         const pchange = ((stockPrices[item.stockname].price -  stockPrices[item.stockname].open)/ stockPrices[item.stockname].open*100).toFixed(2);
                             return (
-                                <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change : change, pchange : pchange }} /> 
+                                item.quantity > 0 && <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change : change, pchange : pchange }} /> 
                             );
                         })}
             </tbody>

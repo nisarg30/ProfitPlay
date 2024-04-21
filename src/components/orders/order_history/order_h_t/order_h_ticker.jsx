@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./order_h_ticker.css";
 // import { useOrderPad } from "../../../context/OrerPadContext";
 import HoverDiv from "../../../hoverdiv/hoverdivp";
+import formatNumber from "../../../../datasource/formatter";
 
 const Ticker = ({currentValues}) => {
 
@@ -23,12 +24,12 @@ const Ticker = ({currentValues}) => {
       onMouseLeave={handleMouseLeave}
       style={{ position: "relative" }}
     >
-      <td title="TATA CONSULTANCY SERV LT">{currentValues.stockname}</td>
+      <td>{currentValues.stockname}</td>
       <td>BUY / DELIEVRY</td>
-      <td>{currentValues.quantity}</td>
-      <td>{currentValues.buy_price}</td>
-      <td>{currentValues.sell_price}</td>
-      <td>{ currentValues.currentPrice }</td>
+      <td>{formatNumber(currentValues.quantity)}</td>
+      <td>{formatNumber(currentValues.buy_price)}</td>
+      <td>{formatNumber(currentValues.sell_price)}</td>
+      <td>{formatNumber(currentValues.currentPrice) }</td>
       <td>Executed</td>
 
       {isHovered && (

@@ -11,7 +11,7 @@ import { WebSocketProvider } from './context/WebSocketCOntext.js';
 
 function App() {
   return (
-    <div className='App' style={{ backgroundColor: '#e6e6e6', height: '100%', width: '100%' }}>
+    <div className='App' style={{ backgroundColor: '#e6e6e6', height: '100vh', width: '100vw' }}>
       <BrowserRouter>
         <WebSocketProvider>
           <AuthorizationProvider>
@@ -20,6 +20,7 @@ function App() {
               <Route path="/orders" element={<Orders />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/accounts" element={<Accounts />} />
+              <Route path="/charts" element={<StockChart/>} />
             </Routes>
           </AuthorizationProvider>
         </WebSocketProvider>
