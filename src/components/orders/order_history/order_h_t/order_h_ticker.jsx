@@ -17,6 +17,8 @@ const Ticker = ({currentValues}) => {
     setIsHovered(false);
   };
 
+  const triangle = currentValues.change > 0 ? "\u25B2" : "\u25BC";
+
   return (
     <tr
       className="order-history-row"
@@ -29,7 +31,7 @@ const Ticker = ({currentValues}) => {
       <td>{formatNumber(currentValues.quantity)}</td>
       <td>{formatNumber(currentValues.buy_price)}</td>
       <td>{formatNumber(currentValues.sell_price)}</td>
-      <td>{formatNumber(currentValues.currentPrice) }</td>
+      <td className={currentValues.change > 0 ? "green" : "red"}>{formatNumber(currentValues.currentPrice)} {triangle} {formatNumber(currentValues.change)}&nbsp; ({currentValues.pchange}%)</td>
       <td>Executed</td>
 
       {isHovered && (

@@ -58,11 +58,27 @@
 }
 
 .green {
-    --color: green;
+    color: rgba(var(--color-text-green), 1);
+    font-weight: 600;
+    /* animation: flash-green 0.3s ease; */
 }
+  
+  @keyframes flash-green {
+    0% { background-color: rgba(var(--color-text-green), 0.1); } 
+    50% { background-color: rgba(var(--color-text-green), 0.05); } 
+    100% { background-color: rgb(255, 255, 255); }
+  }
+  
+  @keyframes flash-red {
+    0% { background-color: rgba(var(--color-text-red), 0.1)} 
+    50% { background-color: rgba(var(--color-text-red), 0.05); }
+    100% { background-color: rgb(255, 255, 255); } 
+  }
 
 .red {
-    --color: red;
+    color: rgba(var(--color-text-red), 1);
+    font-weight: 600;
+    /* animation: flash-red 0.3s ease; */
 }
 
 .icon-container {
@@ -72,4 +88,13 @@
 .icon {
     margin-right: 1rem; /* Used rem unit for margin */
     cursor: pointer;
+    padding: 0.5rem;
+}
+
+.active-button {
+    background-color: var(--color-text-blue-hover);
+    border: 0.07rem solid transparent;
+    border-radius: 0.3rem;
+    color: #ffffff;
+    font-weight: 600;
 }

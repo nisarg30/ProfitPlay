@@ -31,7 +31,7 @@ const Ticker = ({ stockname, price, change, pchange }) => {
       </div>
       <div className='price-container'>
         <div style={{ paddingBottom: '0.35rem', display: 'flex', flexDirection: 'column', marginLeft: 'auto', marginBottom: 'auto', marginTop: 'auto' }}>
-          <span style={{ color: change > 0 ? 'forestgreen' : 'crimson' }}>
+          <span style={{ color: change > 0 ? '#008F75FF' : '#D64D4DFF', alignSelf : 'flex-end', fontWeight : '600' }}>
             {formatNumber(price)}
             {change > 0 ? (
               <span className='up-arrow'>&#9650;</span>

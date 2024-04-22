@@ -1,6 +1,7 @@
 .history-table {
     width : 100%;
     border-collapse: collapse;
+    background-color: #ffffff;
 }
 
 .history-table th, .history-table td {

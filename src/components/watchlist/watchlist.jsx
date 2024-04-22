@@ -13,7 +13,9 @@ const Watchlist = () => {
             <div className="watchlist-container">
                 <div className="watchlist-content">
                     <div className="watchlist-list">
-                        No watchlist found
+                        <div className="watch-img-container">
+                            <div style={{ margin : "auto", width : '16rem'}}>No watchlist found. reate New Watchlist Using + Button Above.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,7 +30,8 @@ const Watchlist = () => {
             <div className="watchlist-container">
                 <div className="watchlist-content">
                     <div className="watchlist-list">
-                        Add some stocks to your watchlist
+                        <div className='watch-img-container'><img src="/empty-watchlist.png" alt="empty-watchlist" style={{ width : '16rem', marginTop : '50%'}}/></div>
+                        <div style={{ padding : '1rem' }}> <p><b>Add stocks.</b></p> <p> This watchlist is empty. Go to "SearchBar" to add items in the watchlist.</p></div>
                     </div>
                 </div>
             </div>

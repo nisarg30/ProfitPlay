@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useDebugValue } from 'react';
 import './account.css';
 import DropdownMenuDel from './dropdown/dropdowndel.jsx';
 import DropdownMenuIntra from './dropdown/dropdownintra.jsx';
@@ -13,7 +13,13 @@ import formatNumber from '../../datasource/formatter.js';
 const Account = () => {
     const navigate = useNavigate()
 
-    const balance = useSelector(state => state.user.userBalance)
+    const balance = useSelector(state => state.user.userBalance);
+    const portfolio = useSelector(state => state.user.portfolio);
+    const openOrders = useSelector(state => state.orders.openOrders);
+    const openpos = useSelector(state => state.orders.openPos);
+    const [portb, setportb] = useState(0);
+    const [opb, setopb] = useState(0);
+    const [opsb, setopsb] = useState(0);
     const [deliveryItems, setDeliveryItems] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -21,9 +27,40 @@ const Account = () => {
         setModalOpen(false);
     };
 
+    useEffect(() => {
+
+        if(!openpos) return;
+        let x = 0;
+        openpos.forEach(element => {
+            x = x + (element.quantity * element.ex_price);
+        });
+        setopsb(x);
+    },[openpos]);
+
+    useEffect(() => {
+
+        if(!portfolio) return;
+        let y = 0;
+        portfolio.forEach(element => {
+            y = y + (element.quantity * element.buy_price);
+        });
+        setportb(y);
+    }, [portfolio]);
+
+    useEffect(() => {
+
+        if(!openOrders) return;
+        let y = 0;
+        openOrders.forEach(element => {
+            y = y + (element.quantity * element.ex_price);
+        });
+        setopb(y);
+    }, [openOrders])
+
     const handleResetUser = async () => {
         const token = localStorage.getItem('token');
         const response = await axios.post(BackendLink.resetuser, {token : token});
+        console.log(response.data)
 
         if(response.status === 200) {
             if(response.data.success === 1001) {
@@ -35,7 +72,7 @@ const Account = () => {
     const handleDeleteUser = async () => {
         const token = localStorage.getItem('token');
         const response = await axios.post(BackendLink.deleteuser, {token : token});
-
+        console.log(response.data);
         if(response.status === 200) {
             if(response.data.success === 1001) {
                 navigate('/login');
@@ -73,14 +110,14 @@ const Account = () => {
                     </div>
                     <div className="balance-info">
                         <span className="label">Total Gain / Loss Realised</span>
-                        <span className="amount">₹ {formatNumber(balance.toFixed(2) - 1000000)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{((balance - 1000000) / 1000000).toFixed(2)} %</span>
+                        <span className="amount">₹ {formatNumber(((balance+portb+opb+opsb).toFixed(2)) - 1000000)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{((balance - 1000000) / 1000000).toFixed(2)} %</span>
                     </div>
                 </div>
             </div>
             <div className="trades">
                 <div className="total-balance-cont2">
                     <div className="total-balance-header">
-                        <span className="name-title">Trade History by Date</span>
+                        <span className="name-title">Trade History</span>
                     </div>
                     <div className="total-balance-header">
                         <span className="name-title" >Delivery</span>

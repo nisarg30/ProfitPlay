@@ -7,6 +7,7 @@ import BackendLink from "../../datasource/backendlink";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateStockPrice } from "../../redux/actions/actions";
+import { getPriceForStock } from "../../redux/reducers/selectors";
 
 const Portfolio = () => {
     const portfolio = useSelector(state => state.user.portfolio);
@@ -58,11 +59,27 @@ const Portfolio = () => {
         }
     }, [portfolio, extsocket]);
 
+    if(portfolio.length == 0) {
+        return (
+            <div className="portfolio">
+                <div className="open-orders-container">
+                    <div className="image-cont">
+                        <img src="/no-history.svg" alt="empty"/>
+                    </div>
+                    <div className="image-cont">
+                        <p> You currently do not have any stocks in your Portfolio.</p>
+                        <p> Buy some stocks from our recommendation using "Delivery" product type.</p>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="portfolio">
             <div className="overflow-cont">
                 <div className="portfolio-overview">
-                    <PortfolioOverview invest={portfolioValue} currnt={currentValuePort} totalDayChange={totalDayChange} /> {/* Pass totalDayChange as prop */}
+                    <PortfolioOverview invest={portfolioValue} currnt={currentValuePort} totalDayChange={totalDayChange} /> 
                 </div>
                 <div className="ticker-container">
                     <table className="portfolio-table">
@@ -80,11 +97,12 @@ const Portfolio = () => {
                         </thead>
                         <tbody>
                             {portfolio.map((item, index) => {
-                                const currentPrice = stockPrices[item.stockname]?.price || 0;
-                                const change = (currentPrice - stockPrices[item.stockname]?.open || 0).toFixed(2);
-                                const pchange = ((currentPrice - stockPrices[item.stockname]?.open || 0) / (stockPrices[item.stockname]?.open || 1) * 100).toFixed(2);
+                                const pricey = getPriceForStock(item.stockname);
+                                const currentPrice = pricey.price; // Correctly compute the current price here.
+                                const change =  (pricey.price -  pricey.open).toFixed(2);
+                                const pchange = ((pricey.price -  pricey.open)/ pricey.open*100).toFixed(2);
                                 return (
-                                    <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change: change, pchange: pchange }} />
+                                    item.quantity > 0 && <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change: change, pchange: pchange }} />
                                 );
                             })}
                         </tbody>

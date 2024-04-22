@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { modifyPortfolio, processBuyTrade, processSellTrade, updateBalance, addOpenOrder } from "../../redux/actions/actions";
 import formatNumber from "../../datasource/formatter";
+import { getPriceForStock } from "../../redux/reducers/selectors";
 
 const OrderPad = () => { 
 
@@ -38,13 +39,16 @@ const OrderPad = () => {
     const currentHour = currentDate.getHours();
     const isMarketOpen = currentDay > 0 && currentDay < 6 && currentHour >= 9 && currentHour < 15; // Assuming market hours from 9:00 AM to 3:00 PM
 
-    // if (!isMarketOpen) {
-    //     return (
-    //         <div className="orderpad">
-    //             <p className="market-closed">Indian markets are closed. Please try again during market hours.</p>
-    //         </div>
-    //     );
-    // }
+    if (!isMarketOpen) {
+        return (
+            <div className="orderpad" style={{ height : '20rem' , width : '30rem', padding : "5rem"}}>
+                <button style={{ float : 'right'}} className="close-orderpad" onClick={hideOrderPad}>
+                    X
+                </button>
+                <p style={{ margin : "auto", fontSize : '2rem', fontWeight : '500'}} className="market-closed">Indian markets are closed. Please try again during market hours.</p>
+            </div>
+        );
+    }
 
     if (!isOrderPadVisible) {
         return null; 
@@ -67,7 +71,7 @@ const OrderPad = () => {
             return (
                 <div className="price-input">
                     <p className="product-type">Live Price</p>
-                    <p className="product-type" style={{marginTop : '2rem'}}>{formatNumber(stockPrices[currentValues.stockname].price)}</p>
+                    <p className="product-type" style={{marginTop : '2rem'}}>{formatNumber(pricey.price)}</p>
                 </div>
             );
         }
@@ -88,7 +92,7 @@ const OrderPad = () => {
             return;
         }
 
-        if(price == '') {
+        if(price == '' && isLimit) {
             setError('Please enter a valid price');
             return;
         }
@@ -185,15 +189,21 @@ const OrderPad = () => {
         setPrice(event.target.value);
     };
 
+    const pricey = getPriceForStock(currentValues.stockname);
+    console.log(pricey);
+
+    var color1 = (pricey.price - pricey.open).toFixed(2) > 0 ? 1 : 0;
+    var triangle1 = color1 > 0 ? "\u25B2" : "\u25BC";
+
     return (
         <div className="orderpad">
             <div className="header-pad">
                 <div className="index-container-pad" id="ind-cont-1">
                     <span className="index-label">{currentValues.stockname}</span>
-                    <span className="index-value green">{formatNumber(stockPrices[currentValues.stockname].price)}</span>
-                    <span className="index-change green">&#9650; 
-                    {formatNumber((stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open).toFixed(2))} 
-                    {((stockPrices[currentValues.stockname].price - stockPrices[currentValues.stockname].open)/stockPrices[currentValues.stockname].open*100).toFixed(2)} % </span>
+                    <span className={color1 > 0 ? "green index-value" : "red index-value"}>{formatNumber(pricey.price)}</span>
+                    <span className={color1 > 0 ? "green index-change" : "red index-change"}>{triangle1}
+                    {formatNumber((pricey.price - pricey.open).toFixed(2))}&nbsp;
+                    ({((pricey.price - pricey.open)/pricey.open*100).toFixed(2)}) % </span>
                 </div> 
                 <div className="toggle-button">
                     <div className="button b2" id="button-10">
@@ -214,13 +224,13 @@ const OrderPad = () => {
                     <p className="product-type">Product Type</p>
                     <div className="separator">
                         <button
-                            className={tradeType === 1 ? 'activt' : '' + 'product'}
+                            className={tradeType === 1 ? (isBuying == false ? "activtb" : "activts") : '' + 'product'}
                             onClick={() => handleTradeChange(1)}
                         >
                             Intraday
                         </button>
                         <button
-                            className={tradeType === 0 ? 'activt' : '' + 'product'}
+                            className={tradeType === 0 ? (isBuying == false ? "activtb" : "activts") : '' + 'product'}
                             onClick={() => handleTradeChange(0)}
                         >
                             Delivery
@@ -231,13 +241,13 @@ const OrderPad = () => {
                     <p className="product-type">Trade Type</p>
                     <div className="separator">
                         <button
-                            className={isLimit === true ? 'activt' : '' + 'product'}
+                            className={isLimit === true ? (isBuying == false ? "activtb" : "activts") : '' + 'product'}
                             onClick={() => setIsLimit(true)}
                         >
                             Limit
                         </button>
                         <button
-                            className={isLimit === false ? 'activt' : '' + 'product'}
+                            className={isLimit === false ? (isBuying == false ? "activtb" : "activts") : '' + 'product'}
                             onClick={() => setIsLimit(false)}
                         >
                             Market
@@ -260,7 +270,7 @@ const OrderPad = () => {
                     <p>Availabel Cash</p>
                     <p>₹ {formatNumber(balance.toFixed(2))}</p>
                 </div>
-                <button className="place-order product" onClick={placeorder}>
+                <button className={(isBuying == false ? "activtb place-order-b" : "activts place-order-s")} onClick={placeorder}>
                     Place Order
                 </button>
             </div>

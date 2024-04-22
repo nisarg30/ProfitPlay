@@ -7,7 +7,7 @@ import './DropdownMenuIntra.css';
 
 function DropdownMenuIntra() {
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [intradayTrades, setIntradayTrades] = useState([]);  // Corrected useState function name
+    const [intradayTrades, setIntradayTrades] = useState([]);
 
     const handleDateChange = date => {
         setSelectedDate(date);
@@ -33,10 +33,10 @@ function DropdownMenuIntra() {
         }
     };
 
-    // Use useEffect to fetch trades when the component mounts
+    // Use useEffect to fetch trades when the component mounts or when selectedDate changes
     useEffect(() => {
-        fetchData(new Date()); // Fetch trades for today's date on initial render
-    }, []); // Empty dependency array ensures this runs only once on mount
+        fetchData(selectedDate);
+    }, [selectedDate]); // Run useEffect whenever selectedDate changes
 
     return (
         <div className='intra-pop'>
@@ -47,13 +47,14 @@ function DropdownMenuIntra() {
                     onChange={handleDateChange}
                     dateFormat="dd/MM/yyyy" 
                     inline
+                    maxDate={new Date()}
                     className='custom-date'
                 />
                 <button className='fetch-data' onClick={() => fetchData(selectedDate)}>Fetch Trades</button>
             </div>
             
             <div className="right-partition">
-                {intradayTrades.length > 0 && (
+                {intradayTrades.length > 0 ? (
                     <div className="trade-data">
                         <h1> Number Of Trades : {intradayTrades.length}</h1>
                         <div className="data-header">
@@ -74,6 +75,10 @@ function DropdownMenuIntra() {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                ) : (
+                    <div className="trade-data">
+                        <h3>No intraday trades for the selected date.</h3>
                     </div>
                 )}
             </div>

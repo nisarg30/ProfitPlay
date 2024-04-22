@@ -5,7 +5,7 @@
 }
 
 .order-history-row:hover td {
-    background-color: #eee;
+    background-color: var(--color-background-hover);
 }
 
 .negative {

@@ -7,6 +7,7 @@ import BackendLink from "../../../../datasource/backendlink";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { updateStockPrice } from "../../../../redux/actions/actions";
+import { getPriceForStock } from "../../../../redux/reducers/selectors";
 
 const OrderHistoryTable = () => {
 
@@ -50,9 +51,10 @@ const OrderHistoryTable = () => {
             </thead>
             <tbody>
                 {orderHistory.map((item, index) => {
-                        const currentPrice = stockPrices[item.stockname].price; // Correctly compute the current price here.
-                        const change =  (stockPrices[item.stockname].price -  stockPrices[item.stockname].open).toFixed(2);
-                        const pchange = ((stockPrices[item.stockname].price -  stockPrices[item.stockname].open)/ stockPrices[item.stockname].open*100).toFixed(2);
+                        const pricey = getPriceForStock(item.stockname);
+                        const currentPrice = pricey.price; // Correctly compute the current price here.
+                        const change =  (pricey.price -  pricey.open).toFixed(2);
+                        const pchange = ((pricey.price -  pricey.open)/ pricey.open*100).toFixed(2);
                             return (
                                 item.quantity > 0 && <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change : change, pchange : pchange }} /> 
                             );

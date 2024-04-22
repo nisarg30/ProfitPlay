@@ -96,47 +96,49 @@ const Login = () => {
     };
 
     return (
-        <div className={`container ${isActive ? 'active' : ''}`}>
-            <div className="form-container sign-up">
-                <form onSubmit={handleRegister}>
-                    <h1>Create Account</h1>
-                    <div className="social-icons">
-                        <a href="#" className="icon"><i className="fab fa-google-plus-g"></i></a>
-                    </div>
-                    <span>or use your email for registration</span>
-                    <input type="text" placeholder="Name" value={rusername} onChange={(e) => rsetUsername(e.target.value)}/>
-                    <input type="email" placeholder="Email" value={remail} onChange={(e) => rsetEmail(e.target.value)}/>
-                    <input type="password" placeholder="Password" value={rpassword} onChange={(e) => rsetPassword(e.target.value)}/>
-                    <input type="password" placeholder="Confirm Password" value={rconfpass} onChange={(e) => rsetConfPass(e.target.value)}/>
-                    <div className="error" style={{color : 'red'}}>{registerError}</div>
-                    <button>Sign Up</button>
-                </form>
-            </div>
-            <div className="form-container sign-in">
-                <form onSubmit={handleLogin}>
-                    <h1>Sign In</h1>
-                    <div className="social-icons">
-                        <a href="#" className="icon"><i className="fab fa-google-plus-g"></i></a>
-                    </div>
-                    <span>or use your email password</span>
-                    <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <a href="#">→ Forget Your Password? </a>
-                    <div className="error" style={{color : 'red'}}>{loginError}</div>
-                    <button type="submit">Sign In</button>
-                </form>
-            </div>
-            <div className="toggle-container">
-                <div className="toggle">
-                    <div className="toggle-panel toggle-left">
-                        <h1>Welcome Back!</h1>
-                        <p>Enter your personal details to use all of the site features</p>
-                        <button className="hidden" onClick={handleLoginClick}>Sign In</button>
-                    </div>
-                    <div className="toggle-panel toggle-right">
-                        <h1>Hello, Friend!</h1>
-                        <p>Register with your personal details to use all of the site features</p>
-                        <button className="hidden" onClick={handleRegisterClick}>Sign Up</button>
+        <div className="semi-cont">
+            <div className={`container ${isActive ? 'active' : ''}`}>
+                <div className="form-container sign-up">
+                    <form onSubmit={handleRegister}>
+                        <h1>Create Account</h1>
+                        <div className="social-icons">
+                            <a href="#" className="icon"><i className="fab fa-google-plus-g"></i></a>
+                        </div>
+                        <span>or use your email for registration</span>
+                        <input type="text" placeholder="Name" value={rusername} onChange={(e) => rsetUsername(e.target.value)}/>
+                        <input type="email" placeholder="Email" value={remail} onChange={(e) => rsetEmail(e.target.value)}/>
+                        <input type="password" placeholder="Password" value={rpassword} onChange={(e) => rsetPassword(e.target.value)}/>
+                        <input type="password" placeholder="Confirm Password" value={rconfpass} onChange={(e) => rsetConfPass(e.target.value)}/>
+                        <div className="error" style={{color : 'red'}}>{registerError}</div>
+                        <button>Sign Up</button>
+                    </form>
+                </div>
+                <div className="form-container sign-in">
+                    <form onSubmit={handleLogin}>
+                        <h1>Sign In</h1>
+                        <div className="social-icons">
+                            <a href="#" className="icon"><i className="fab fa-google-plus-g"></i></a>
+                        </div>
+                        <span>or use your email password</span>
+                        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <a href="#">→ Forget Your Password? </a>
+                        <div className="error" style={{color : 'red'}}>{loginError}</div>
+                        <button type="submit">Sign In</button>
+                    </form>
+                </div>
+                <div className="toggle-container">
+                    <div className="toggle">
+                        <div className="toggle-panel toggle-left">
+                            <h1>Welcome Back!</h1>
+                            <p>Enter your personal details to use all of the site features</p>
+                            <button className="hidden" onClick={handleLoginClick}>Sign In</button>
+                        </div>
+                        <div className="toggle-panel toggle-right">
+                            <h1>Hello, Friend!</h1>
+                            <p>Register with your personal details to use all of the site features</p>
+                            <button className="hidden" onClick={handleRegisterClick}>Sign Up</button>
+                        </div>
                     </div>
                 </div>
             </div>

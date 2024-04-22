@@ -3,6 +3,7 @@ import './dropdown.css';
 import Modal from './dropdownticker/dropdowndelticker'; 
 import axios from 'axios'; 
 import BackendLink from '../../../datasource/backendlink';
+import formatNumber from '../../../datasource/formatter';
 
 const DropdownMenuDel = ({ items }) => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -51,7 +52,7 @@ const DropdownMenuDel = ({ items }) => {
                         {items.length !== 0 && items.map((item, index) => (
                             <tr className="del-stocks" key={index} onClick={() => handleRowClick(item)}>
                                 <td className='del-stock'>{item.stockname}</td>
-                                <td className='del-stock'>{item.realised}</td>
+                                <td className='del-stock'>{formatNumber(item.realised)}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -60,7 +61,7 @@ const DropdownMenuDel = ({ items }) => {
             <Modal isOpen={modalOpen} onClose={closeModal}>
                 <div className="modal-header">
                     <div className="modal-stockname">{selectedItem && selectedItem.stockname}</div>
-                    <div className="modal-realised">{selectedItem && `Realised Gain / Loss: ${selectedItem.realised}`}</div>
+                    <div className="modal-realised">{selectedItem && `Realised Gain / Loss: ${formatNumber(selectedItem.realised)}`}</div>
                 </div>
                 {additionalData && (
                     <div className="additional-data">
@@ -74,7 +75,7 @@ const DropdownMenuDel = ({ items }) => {
                             {additionalData.map((trade, idx) => (
                                 <div className="data-row" key={idx}>
                                     <div className="data-cell">{trade.date}</div>
-                                    <div className="data-cell">{trade.direction}</div>
+                                    <div className="data-cell">{trade.direction == 0 ? "BUY" : "SELL"}</div>
                                     <div className="data-cell">{trade.quantity}</div>
                                     <div className="data-cell">{trade.ex_price}</div>
                                 </div>

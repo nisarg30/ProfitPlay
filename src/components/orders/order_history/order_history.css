@@ -6,6 +6,7 @@
     height : calc(100vh - 13.3rem);
     width : calc(100vw - 18rem);
     overflow-x: auto;
+    background-color: #ffffff;
 }
 
 .order-history-table::-webkit-scrollbar-track

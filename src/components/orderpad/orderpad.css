@@ -147,7 +147,7 @@
 }
 
 .close-orderpad:hover {
-    background-color: #ed1c1c;
+    background-color: rgba(var(--color-text-red), 1);
     color: #ffffff;
 }
 
@@ -181,16 +181,28 @@
     font-size: 1rem;
 }
   
-.activt{
+.activtb{
     height: 3rem;
     margin-top: 0.2rem;
     margin-bottom: 1rem;
-    border: 0.5px solid #999999;
     padding: 0.8rem;
     font-size: 1rem;
-    background-color: #c8f8d5;
-    color: #078e2b;
-    border: 0.5px solid #c8f8d5;
+    background-color: var(--color-text-green-light12);
+    color: rgba(var(--color-text-green), 1);
+    border: 0.0014rem solid rgba(var(--color-text-green), 1);
+    font-weight: 600;
+  }
+
+  .activts{
+    height: 3rem;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: var(--color-text-red-light12);
+    color: rgba(var(--color-text-red), 1);
+    border: 0.0014rem solid rgba(var(--color-text-red), 1);
+    font-weight: 600;
   }
 
 .quantity-sel {
@@ -240,17 +252,29 @@
     margin-left: 1rem;
 }
 
-.place-order {
+.place-order-b {
     float: right;
     margin-left: auto;
     margin-right: 1rem;
     margin-top: auto;
-    background-color: #8ff7aa;
     font-weight: 600;
-    color: #078e2b;
 }
 
-.place-order:hover {
-    background-color: #19a13b;
-    color: #fff;
+.place-order-s {
+    float: right;
+    margin-left: auto;
+    margin-right: 1rem;
+    margin-top: auto;
 }
+
+
+.place-order-s:hover {
+    background-color: rgba(var(--color-text-red), 2);
+    color: #ffffff;
+}
+
+.place-order-b:hover {
+    background-color: rgba(var(--color-text-green), 2);
+    color: #ffffff;
+}
+

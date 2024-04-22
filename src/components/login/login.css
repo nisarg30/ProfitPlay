@@ -4,12 +4,16 @@
 }
 
 body {
-    background-color: #c9d6ff;
+    background-color: var(--color-background-grey);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+}
+
+.semi-cont {
+    display: grid;
 }
 
 .container {
@@ -21,6 +25,10 @@ body {
     width: 48rem; /*  */
     max-width: 100%;
     min-height: 30rem; /*  */
+    align-self: center;
+    justify-self: center;
+    margin-top: 15rem;
+
 }
 
 .container p {
@@ -42,7 +50,7 @@ body {
 }
 
 .container button {
-    background-color: #2980b9; /* Change to blue color */
+    background-color: var(--color-text-blue); /* Change to blue color */
     color: #fff;
     font-size: 0.75rem; /*  */
     padding: 0.625rem 2.813rem; /*  */
@@ -164,9 +172,9 @@ body {
 }
 
 .toggle {
-    background-color: #3498db; /* Change to blue color */
+    background-color: var(--color-text-blue); /* Change to blue color */
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
+    background: linear-gradient(to right, var(--color-text-blue), var(--color-secondary-purple));
     color: #fff;
     position: relative;
     left: -100%;

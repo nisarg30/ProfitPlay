@@ -71,25 +71,27 @@ const WatchControl = () => {
         const map = {};
 
         // Mark elements from array1
-        array1.forEach((obj) => {
-            const stockname = obj.stockname;
-            map[stockname] = true;
-        });
+        if(array1) {
+            array1.forEach((obj) => {
+                const stockname = obj.stockname;
+                map[stockname] = true;
+            });
+        }
 
-        array2.forEach((obj) => {
-            const stockname = obj.stockname;
-            if (map[stockname]) {
-                delete map[stockname]; 
-            } else {
-                uncommonArray2.push(obj); 
-            }
-        });
+        if(array2) {
+            array2.forEach((obj) => {
+                const stockname = obj.stockname;
+                if (map[stockname]) {
+                    delete map[stockname]; 
+                } else {
+                    uncommonArray2.push(obj); 
+                }
+            });
+        }
 
         for (const key in map) {
             uncommonArray1.push({ stockname: key });
         }
-
-        console.log(uncommonArray1, uncommonArray2);
 
         socket.emit('leaverequest1', uncommonArray1);
         socket.emit('joinrequest', uncommonArray2);

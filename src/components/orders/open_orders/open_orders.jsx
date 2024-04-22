@@ -6,6 +6,7 @@ import BackendLink from "../../../datasource/backendlink";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { updateStockPrice } from "../../../redux/actions/actions";
+import { getPriceForStock } from "../../../redux/reducers/selectors";
 
 const OpenOrders = () => {
 
@@ -33,6 +34,20 @@ const OpenOrders = () => {
         }
     }, [openOrders, extsocket]);
 
+    if(openOrders.length == 0) {
+        return (
+            <div className="open-orders-container">
+                <div className="image-cont">
+                    <img src="/no-history.svg" alt="empty"/>
+                </div>
+                <div className="image-cont">
+                    <p> You currently do not have any open orders.</p>
+                    <p> Place some "Limit" Order from "OrderPad".</p>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="open-orders-container">
             <table className="open-orders-table">
@@ -47,9 +62,10 @@ const OpenOrders = () => {
                 </thead>
                 <tbody>
                     {openOrders.map((item, index) => {
-                        const currentPrice = stockPrices[item.stockname].price; // Correctly compute the current price here.
-                        const change =  (stockPrices[item.stockname].price -  stockPrices[item.stockname].open).toFixed(2);
-                        const pchange = ((stockPrices[item.stockname].price -  stockPrices[item.stockname].open)/ stockPrices[item.stockname].open*100).toFixed(2);
+                        const pricey = getPriceForStock(item.stockname);
+                        const currentPrice = pricey.price; 
+                        const change =  (pricey.price -  pricey.open).toFixed(2);
+                        const pchange = ((pricey.price -  pricey.open)/ pricey.open*100).toFixed(2);
                             return (
                                 <Ticker key={index} currentValues={{ ...item, currentPrice: currentPrice, change : change, pchange : pchange }} /> 
                             );

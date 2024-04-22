@@ -15,6 +15,7 @@
     list-style: none;
     height: calc(100vh - 9.15rem);
     overflow-y: auto;
+    width: 16rem;
   }
   .watchlist-list::-webkit-scrollbar-track
   {

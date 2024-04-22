@@ -14,6 +14,7 @@
     margin-bottom: 0.3rem;
     overflow-y: auto;
     position: relative;
+    background-color: #ffffff;
 }
 
 .positions-table {
@@ -36,7 +37,7 @@
 }
 
 .positions-row:hover td{
-    background-color: #eee;
+    background-color: var(--color-background-hover);
 }
 
 .total-gain-loss {
@@ -45,8 +46,7 @@
     height: 3rem;
     float: right;
     background-color: #fff;
-    border: 0.5px solid #090808;
-    /* margin-bottom: 0.3rem; */
+    margin-bottom: 0.14rem;
     margin-top: 0.14rem;
 }
 

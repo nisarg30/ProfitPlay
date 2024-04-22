@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal-overlay2 {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,20 +11,22 @@
     z-index: 1000;
   }
   
-  .modal-content {
+  .modal-content2 {
     background: white;
     padding: 20px;
     border-radius: 5px;
     width: 60rem;
     min-height: calc(100vh - 40rem);
+    height: calc(100vh - 25rem);
   }
   
-  .drop-close-button {
-    position: absolute;
+  .drop-close-button2 {
+    position: relative;
     right: 10px;
     top: 10px;
     border: none;
     background: none;
     font-size: 1.5rem;
+    float: inline-end;
   }
   

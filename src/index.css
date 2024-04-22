@@ -49,6 +49,76 @@ html {
   }
 }
 
+:root {
+  --color-text-blue: #3F5BD9;
+  --color-text-blue-hover: #354CB5;
+  --color-text-green: 0, 143, 117;
+  --color-text-red: 214, 77, 77;
+  --color-background-cyan: #21C7DB;
+  --color-text-yellow: #F9BA4D;
+  --color-background-fx: #fff1d7;
+  --color-background-up: #E4F6F5;
+  --color-background-down: #FDEBEA;
+  --color-secondary-purple: #581DBE;
+  --color-background-purple: #e8dbff;
+  --color-success-bg: #F0FAF5;
+  --color-text-grey: #949391;
+  --color-text-white: #ffffff;
+  --color-text-black: 0, 0, 0;
+  --color-black: 0, 0, 0;
+  --color-text-bold: #253040;
+  --color-text-base: #425061;
+  --color-text-muted: #ACB2BD;
+  --color-border-grey: #E8EBF1;
+  --color-background-grey: #e8ebf2;
+  --color-background-hover: #EDEFF7;
+  --color-background-blue: #E3E6F7;
+  --color-text-blue-light12: #E8EBFA;
+  --color-text-green-light24: #4baa99;
+  --color-text-red-light24: #F5D4D4;
+  --color-text-green-light12: #E0F2EE;
+  --color-text-red-light12: #FAEAEA;
+  --color-background-cyan-light12: #E4F8FB;
+  --color-background-yellow-light12: #FEF7EA;
+  --color-secondary-purple-light12: #EBE4F7;
+  --color-text-blue-light24: #D1D8F6;
+  --color-background-cyan-light24: #3a767c;
+  --color-background-yellow-light24: #FEEED4;
+  --color-secondary-purple-light24: #D7C9EF;
+  --color-background-medium-blue: #AEC8FF;
+  --color-background-purple: #EBE4F7;
+  --color-background-lightgrey: #F7F7F7;
+  --color-background-hover-green: #E0F2EE;
+  --color-border-popover: #CACBCE;
+  --color-light-grey: #6a7582;
+  --color-dark-grey: #2A394E;
+  --color-yellow-border: rgba(249, 186, 77, .12);
+  --color-error: #FFDBDB;
+  --color-error-bg: #FFFAFA;
+  --color-hawkes-blue: #DDDFE4;
+  --color-grey: #EAEBF1;
+  --color-success-border: #389683;
+  --color-shadow-color: rgba(224, 224, 236, .5);
+  --color-rightBorder-color: rgba(232, 235, 241, 1);
+  --color-around-color: rgba(43, 47, 63, .100934);
+  --color-top-color: rgba(231, 233, 243, .6);
+  --color-all-color: rgba(138, 141, 153, .16);
+  --color-overlap-shadow: 0px 4px 24px 0px rgba(0, 0, 0, .12);
+  --color-basket-shadow: 6px 6px 28px 0px rgba(43, 47, 63, .1);
+  --color-watchlistHover-shadow: 0px 4px 20px 0px rgba(43, 47, 63, .24);
+  --color-firstStickyCol-shadow: 0 0 50px rgb(0 0 0 / 25%);
+  --color-expandedOverlay-shadow: -8px 0px 15px 0px rgba(0, 0, 0, .07);
+  --color-topshadow: rgba(0, 0, 0, .14);
+  --color-darkRightBorder-color: var(--color-border-grey);
+  --color-watchlistPositionHover-shadow: 0px 8px 24px rgba(43, 47, 63, .16);
+  --color-overlap-grey: #F1F4FD;
+  --color-overlap-white: #ffffff;
+  --color-overlap-hover: #E3E6F7;
+  --color-overlap-muted: #E8EBF1;
+  --color-chart-cyan: #ffffff;
+}
+
+
 /* @media (max-width: 270px) {
   html {
     font-size: 3px; 

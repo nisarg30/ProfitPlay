@@ -16,7 +16,7 @@
   }
   
   .ticker:hover {
-    background-color: #e6e6e6;
+    background-color: var(--color-background-hover);
   }
   
   .stockname {
@@ -36,16 +36,17 @@
   .up-arrow,
   .down-arrow {
     margin-left: 2px;
+    line-height: 0.8rem;
     font-size: 1rem;
     float: right;
   }
   
   .up-arrow {
-    color: forestgreen;
+    color: #008F75FF;
   }
   
   .down-arrow {
-    color: crimson;
+    color: #D64D4DFF;
   }
 
   

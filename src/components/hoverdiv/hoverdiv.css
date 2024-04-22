@@ -21,7 +21,7 @@
 }
 
 .button-buy {
-    color: #048539;
+    color: rgba(var(--color-text-green), 1);
     background-color: #ffffff;
     border: none;
     margin-left: 0.2rem;
@@ -29,19 +29,19 @@
 }
 
 .button-buy:hover{
-    background-color: #048539;
+    background-color: rgba(var(--color-text-green), 1);
     color: #ffffff;
 }
 
 .button-sell {
-    color: #e74c3c;
+    color: rgba(var(--color-text-red), 1);
     background-color: #ffffff;
     border: none;
     border-radius: 5px;
 }
 
 .button-sell:hover{
-    background-color: #e74c3c;
+    background-color: rgba(var(--color-text-red), 1);
     color: #ffffff;
     border: none;
 }

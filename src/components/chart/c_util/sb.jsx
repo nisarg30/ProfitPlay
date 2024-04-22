@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BackendLink from '../../../datasource/backendlink';
-import './sb.css'
+import './sb.css';
 
-const SearchBar = ({ symbol, setSymbol }) => {
-
+const CustomSearchBar = ({ symbol, setSymbol }) => {
     const [data, setData] = useState([]);
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
@@ -53,30 +52,26 @@ const SearchBar = ({ symbol, setSymbol }) => {
     };
 
     return (
-        <div className="SearchBar">
-            <div className="searchcont">
+        <div className="custom-searchbar-container">
+            <div className="custom-search-container">
                 <input
-                    className="SearchBarInput"
+                    className="custom-search-input"
                     type="text"
                     value={query}
                     onChange={handleInputChange}
                     placeholder="Search..."
                 />
-                <div className="SearchIcon">
+                <div className="custom-search-icon">
                     <i className="fa fa-search" aria-hidden="true"></i>
                 </div>
             </div>
 
             {results.length > 0 && (
-                <ul className="SearchResults">
+                <ul className="custom-search-results">
                     {results.map((item) => (
-                        <li
-                            key={item._id}
-                            className="SearchResultItem"
-                        >
-                            <div className='result-div' onClick={() => handleResultClick(item.stockname)}>
-                                <div className="xyz"
-                                    >
+                        <li key={item._id} className="custom-search-result-item">
+                            <div className='custom-result-div' onClick={() => handleResultClick(item.stockname)}>
+                                <div className="custom-xyz">
                                     {item.stockname}
                                 </div>
                             </div>
@@ -89,4 +84,4 @@ const SearchBar = ({ symbol, setSymbol }) => {
     );
 };
 
-export default SearchBar;
+export default CustomSearchBar;

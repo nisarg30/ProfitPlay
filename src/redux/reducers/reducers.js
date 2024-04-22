@@ -171,7 +171,7 @@ function processSellTradeClosePos(closePos, trade) {
     if (index !== -1) {
         const existingEntry = {...newClosePos[index]};
         existingEntry.quantity += trade.quantity;
-        existingEntry.sell_price = ((existingEntry.sell_price * (existingEntry.quantity - trade.quantity)) + (trade.sell_price * trade.quantity)) / (existingEntry.quantity + trade.quantity);
+        existingEntry.sell_price = ((existingEntry.sell_price * (existingEntry.quantity)) + (trade.sell_price * trade.quantity)) / (existingEntry.quantity + trade.quantity);
         newClosePos[index] = existingEntry;
     } else {
         newClosePos.push({

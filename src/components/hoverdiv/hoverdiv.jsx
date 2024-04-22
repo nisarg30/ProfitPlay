@@ -5,13 +5,20 @@ import BackendLink from "../../datasource/backendlink";
 import axios from "axios";
 import { useAuthorization } from "../../context/Authcontext";
 import { useWebSocket } from "../../context/WebSocketCOntext";
+import { useNavigate } from "react-router-dom";
 
 import DeleteIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const HoverDiv = ({ currentValues }) => {
+    const navigate = useNavigate();
     const { showOrderPad } = useOrderPad();
     const { watchlists, activeWatchlist, setWatchlists } = useAuthorization();
     const { socket } = useWebSocket(); 
+
+    const handleChart = () => {
+        localStorage.setItem("chart_stock", currentValues.stockname);
+        navigate('/charts');
+    }
     
     const removeFromWatchlist = (watchlistIndex, stocknameToRemove) => {
         const updatedWatchlists = [...watchlists]; // Create a copy of the watchlists array
@@ -44,7 +51,7 @@ const HoverDiv = ({ currentValues }) => {
         <div className="hover-div">
             <button className="button-buy" onClick={() => showOrderPad({...currentValues, isBuy : false})}>B</button>
             <button className="button-sell" onClick={() => showOrderPad({...currentValues, isBuy : true})}>S</button>
-            <button className="button-chart">Chart</button>
+            <button className="button-chart" onClick={handleChart}>Chart</button>
             <DeleteIcon className="button-chart" onClick={deleteStock} />
         </div>
     );

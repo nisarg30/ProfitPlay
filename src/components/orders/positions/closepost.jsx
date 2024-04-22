@@ -15,6 +15,7 @@ const Tickerc = ({ currentValues }) => {
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
+    const triangle = currentValues.change > 0 ? "\u25B2" : "\u25BC";
 
     return (
         <tr
@@ -27,8 +28,8 @@ const Tickerc = ({ currentValues }) => {
             <td>{formatNumber(currentValues.quantity)}</td>
             <td>{formatNumber(currentValues.buy_price.toFixed(2))}</td>
             <td>{formatNumber(currentValues.sell_price.toFixed(2))}</td>
-            <td>{formatNumber(currentValues.currentPrice)}</td>
-            <td>{ formatNumber(gain.toFixed(2)) }   { gainp.toFixed(2) }% </td>
+            <td className={currentValues.change > 0 ? "green" : "red"}>{formatNumber(currentValues.currentPrice)} {triangle} {formatNumber(currentValues.change)}&nbsp; ({currentValues.pchange}%)</td>
+            <td className={ gain > 0 ? "green" : "red"}>{ formatNumber(gain.toFixed(2)) }   { gainp.toFixed(2) }% </td>
         
         {isHovered && (
             <HoverDiv currentValues={currentValues}/>

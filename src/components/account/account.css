@@ -22,7 +22,7 @@
   }
   
   .total-balance-header, .balance-card {
-    background-color: #F0F0F0;
+    background-color: var(--color-background-grey);
     padding: 0.5rem 0.5rem;
     border-radius: 0.42rem;
     margin-bottom: 0.57rem;
@@ -39,10 +39,13 @@
     align-items: center;
   }
   
-  .name-title, .label, .amount {
-    font-weight: 500;
+  .name-title, .label {
+    font-weight: 550;
   }
   
+  .amount {
+    font-weight: 600;
+  }
   .balance-info {
     display: flex;
     flex-direction: column;
@@ -79,16 +82,18 @@
   }
 
   .action-button {
-    background-color: #007bff;
+    background-color: var(--color-text-blue-hover);
     color: white;
     border: none;
-    padding: 8px 16px;
-    margin-left: 10px;
+    padding: 0.29rem 0.58rem;
+    margin-left: 0.71rem;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 0.28rem;
     outline: none;
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
 .action-button:hover {
-    background-color: #0056b3;
+    background-color: var(--color-text-blue);
 }

@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './header.css';
 import { useSelector } from 'react-redux';
 import { useWebSocket } from '../../context/WebSocketCOntext';
 import formatNumber from '../../datasource/formatter';
 
 const Header = () => {
-    const navigate = useNavigate();
-    const handlleNavigate = (state) => {
-        navigate(state)
-    }
 
+    const [activeButton, setActiveButton] = useState();
+    const navigate = useNavigate();
+    const location = useLocation();
     const { socket } = useWebSocket();
 
     useEffect(() => {
@@ -18,8 +17,28 @@ const Header = () => {
             const array = [ {stockname : "NIFTY"}, { stockname : "BANKNIFTY"}]
             socket.emit('joinrequest', array);
         }
-    }, [socket])
+    }, [socket]);
+
+    useEffect(() => {
+        setActiveButton(location.pathname);
+    }, [location.pathname]);
+
+    const handlleNavigate = (route) => {
+        setActiveButton(route);
+        navigate(route);
+    }
+
     const stockPrices = useSelector(state => state.stocks);
+    
+    if(stockPrices['BANKNIFTY'] != null) {
+        var color = (stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open).toFixed(2) > 0 ? 1 : 0;
+        var triangle = color > 0 ? "\u25B2" : "\u25BC";
+    }
+
+    if(stockPrices['NIFTY'] != null) {
+        var color1 = (stockPrices['NIFTY'].price - stockPrices['NIFTY'].open).toFixed(2) > 0 ? 1 : 0;
+        var triangle1 = color1 > 0 ? "\u25B2" : "\u25BC";
+    }
 
     return (
         <div className="header">
@@ -28,42 +47,30 @@ const Header = () => {
             </div>
             <div className="index-container">
                 <div className="index" id="ind-cont-1">
-                    <span className="index-label">BANKNIFTY</span>
-                    <span className="index-value green">{formatNumber(stockPrices['BANKNIFTY'] != null ? stockPrices['BANKNIFTY'].price : 0)}&nbsp;</span>
-                    <span className="index-change green">&#9650;&nbsp;{stockPrices['BANKNIFTY'] != null ? formatNumber((stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open).toFixed(2)) : 0}&nbsp;&nbsp;({stockPrices['BANKNIFTY'] != null ? (((stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open)/ stockPrices['BANKNIFTY'].open)*100).toFixed(2) : 0} %)</span>
+                    <span className="index-label">BANKNIFTY&nbsp;</span>
+                    <span className={ color == 1 ? "index-change green" : "index-change red"}>{formatNumber(stockPrices['BANKNIFTY'] != null ? stockPrices['BANKNIFTY'].price : 0)}&nbsp; {triangle}</span>
+                    <span className={ color == 1 ? "index-change green" : "index-change red"}>&nbsp;{stockPrices['BANKNIFTY'] != null ? formatNumber((stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open).toFixed(2)) : 0}&nbsp;&nbsp;({stockPrices['BANKNIFTY'] != null ? (((stockPrices['BANKNIFTY'].price - stockPrices['BANKNIFTY'].open)/ stockPrices['BANKNIFTY'].open)*100).toFixed(2) : 0} %)</span>
                 </div>
                 <div className='splitter'>
                     <span className='splitter1'> | </span>
                 </div>
                 <div className="index" id="ind-cont-2">
-                    <span className="index-label">NIFTY</span>
-                    <span className="index-value red">{stockPrices['NIFTY'] != null ? formatNumber(stockPrices['NIFTY'].price) : 0}</span>
-                    <span className="index-change red">&#9650;&nbsp;{stockPrices['NIFTY'] != null ? formatNumber((stockPrices['NIFTY'].price - stockPrices['NIFTY'].open).toFixed(2)) : 0}&nbsp;&nbsp;({stockPrices['NIFTY'] != null ? ((stockPrices['NIFTY'].price - stockPrices['NIFTY'].open)/ stockPrices['NIFTY'].open*100).toFixed(2) : 0} %)</span>
+                    <span className="index-label">NIFTY&nbsp;</span>
+                    <span className={ color1 == 1 ? "index-change green" : "index-change red"}>{stockPrices['NIFTY'] != null ? formatNumber(stockPrices['NIFTY'].price) : 0} {triangle1}</span>
+                    <span className={ color1 == 1 ? "index-change green" : "index-change red"}>&nbsp;{stockPrices['NIFTY'] != null ? formatNumber((stockPrices['NIFTY'].price - stockPrices['NIFTY'].open).toFixed(2)) : 0}&nbsp;&nbsp;({stockPrices['NIFTY'] != null ? ((stockPrices['NIFTY'].price - stockPrices['NIFTY'].open)/ stockPrices['NIFTY'].open*100).toFixed(2) : 0} %)</span>
                 </div>
             </div>
             <div className="icon-container">
-                {/* <div className="icon" title="Watchlist">
-                    <span>📋</span>
-                </div>
-                <div className="icon" title="Portfolio">
-                    <span>💼</span>
-                </div>
-                <div className="icon" title="Orders">
-                    <span>📝</span>
-                </div>
-                <div className="icon" title="Account">
-                    <span>👤</span>
-                </div> */}
-                <div className="icon" title="Watchlist" onClick={ () => {handlleNavigate('/charts')}}>
+                <div className={activeButton === '/charts' ? "icon active-button" : "icon"} title="Charts" onClick={ () => {handlleNavigate('/charts')}}>
                     <span>Charts</span>
                 </div>
-                <div className="icon" title="Portfolio" onClick={ () => {handlleNavigate('/portfolio')}}>
+                <div className={activeButton === '/portfolio' ? "icon active-button" : "icon"} title="Portfolio" onClick={ () => {handlleNavigate('/portfolio')}}>
                     <span>Portfolio</span>
                 </div>
-                <div className="icon" title="Orders" onClick={ () => {handlleNavigate('/orders')}}>
+                <div className={activeButton === '/orders' ? "icon active-button" : "icon"} title="Orders" onClick={ () => {handlleNavigate('/orders')}}>
                     <span>Orders</span>
                 </div>
-                <div className="icon" title="Account" onClick={ () => {handlleNavigate('/accounts')}}>
+                <div className={activeButton === '/accounts' ? "icon active-button" : "icon"} title="Account" onClick={ () => {handlleNavigate('/accounts')}}>
                     <span>Account</span>
                 </div>
             </div>

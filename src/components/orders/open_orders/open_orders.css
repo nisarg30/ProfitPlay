@@ -3,6 +3,7 @@
     height : calc(100vh - 6.2rem);
     width : calc(100vw - 18rem);
     overflow-y: auto;
+    background-color: #ffffff;
 }
 
 .open-orders-table {
@@ -21,6 +22,10 @@
     padding: 1.04rem;
 }
 
+.open-orders-table tr {
+    font-weight: 500;
+}
+
 .open-orders-table th {
     position: sticky;
     top : 0;
@@ -28,7 +33,7 @@
 }
 
 .open-orders-row:hover td {
-    background-color: #eee;
+    background-color: var(--color-background-hover);
 }
 
 .open-orders-container::-webkit-scrollbar-track
@@ -53,4 +58,24 @@
 .open-orders-row td {
     height: 3rem;
 }
+
+.image-cont {
+    display: grid;
+}
+
+.image-cont img {
+    width: 15rem;
+    align-self: center;
+    justify-self: center;
+    height: 15rem;
+    margin-top: 10%;
+}
+
+.image-cont p {
+    align-self: center;
+    justify-self: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
 

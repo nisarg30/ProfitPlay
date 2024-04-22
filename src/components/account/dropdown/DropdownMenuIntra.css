@@ -19,13 +19,15 @@
 
 .fetch-data {
     height: 2rem;
-    font-size: 1rem;
+    width: 50%;
+    font-size: 1.2rem;
     margin-top: 1rem;
     background-color: rgb(66, 76, 255);
     color : white;
     border-radius: 100rem;
     font-weight: 400;
-    border : none
+    border : none;
+    align-self : center;
 }
 
 .react-datepicker__month-container  {
