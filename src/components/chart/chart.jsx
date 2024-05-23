@@ -48,6 +48,25 @@ class ErrorBoundary extends React.Component {
 
 const StockChart = () => {
 
+    const timeFrameToMinutes = {
+        "1": 1,
+        "3": 3,
+        "5": 5,
+        "15": 15,
+        "30": 30,
+        "45": 45,
+        "60": 60,
+        "120": 120,
+        "180": 180,
+        "240": 240,
+        "1D": 1440,  
+        "1W": 10080, 
+        "1M": 43200, 
+        "3M": 129600, 
+        "6M": 259200, 
+        "12M": 518400 
+    };
+
     //prop setup
     const bbb = localStorage.getItem('chart_tf');
     const [timeFrame, setTimeFrame] = useState(bbb != undefined ? bbb : "1D");
@@ -92,42 +111,68 @@ const StockChart = () => {
         setSocket(socket);
 
         socket.on('dataUpdate', (data) => {
+
             if (!chartRef.current || !chartRef.current.chart) {
-                return; // Exit the function if chartRef.current or chartRef.current.chart is null
+                return; 
             }
-            if(chartRef.current.chart.series[0].data.length > 0) {
+
+            const tx = timeFrameToMinutes.timeFrame;
+        
+            const tf = tx * 60 * 1000; 
+            const timestamp = parseInt(data.exchange_timestamp, 10) + 19800 * 1000; 
+        
+            if (chartRef.current.chart.series[0].data.length > 0) {
                 const len = chartRef.current.chart.series[0].data.length;
-                const point = chartRef.current.chart.series[0].data[len-1];
-                if(point.x === ((data.time + 19800)*1000)){
+                const point = chartRef.current.chart.series[0].data[len - 1];
+        
+                const lastPointTimeFrameBoundary = point.x - (point.x % tf);
+                const currentTimestampTimeFrameBoundary = timestamp - (timestamp % tf);
+        
+                if (lastPointTimeFrameBoundary === currentTimestampTimeFrameBoundary) {
+                    // Update the existing candle if it's within the same time frame
                     var high = Math.max(point.high, data.max);
                     var low = Math.min(point.low, data.min);
-                    chartRef.current.chart.series[0].data[len-1].update({
-                        high : high,
-                        low : low,
-                        close : data.close,
-                        open : data.open
+                    chartRef.current.chart.series[0].data[len - 1].update({
+                        high: high,
+                        low: low,
+                        close: data.close,
+                        open: data.open
                     });
-                    chartRef.current.chart.series[1].data[len-1].update({
-                        y : data.volume
-                    })  
-                }
-                else{
-                    data.time = (data.time + 19800)*1000;
+                    chartRef.current.chart.series[1].data[len - 1].update({
+                        y: data.volume
+                    });
+                } else {
+                    // Add a new candle if it's a new time frame
                     chartRef.current.chart.series[0].addPoint([
-                        data.time,
+                        currentTimestampTimeFrameBoundary,
                         data.open,
                         data.max,
                         data.min,
                         data.close,
                     ], true);
-
+        
                     chartRef.current.chart.series[1].addPoint([
-                        data.time,
+                        currentTimestampTimeFrameBoundary,
                         data.volume
                     ], true);
                 }
+            } else {
+                // Add the first candle if no data points exist yet
+                const initialTimestamp = timestamp - (timestamp % tf);
+                chartRef.current.chart.series[0].addPoint([
+                    initialTimestamp,
+                    data.open,
+                    data.max,
+                    data.min,
+                    data.close,
+                ], true);
+        
+                chartRef.current.chart.series[1].addPoint([
+                    initialTimestamp,
+                    data.volume
+                ], true);
             }
-        });
+        });        
         return () => {
             console.log('Disconnecting socket');
             socket.close();
@@ -275,7 +320,7 @@ const StockChart = () => {
                 series:
                     [{
                         type: 'candlestick',
-                        name: `${timeFrame}`,
+                        name: `STOCK`,
                         data: stockData,
                         dataGrouping: {
                             enabled: false

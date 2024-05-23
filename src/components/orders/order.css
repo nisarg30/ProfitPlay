@@ -25,5 +25,6 @@
 .activeButton {
     color: blue;
     border-bottom: 0.07rem solid blue;
+    background-color: var(--color-background-blue);
     font-weight: 500;
 }

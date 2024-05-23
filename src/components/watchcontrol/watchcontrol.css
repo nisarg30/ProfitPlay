@@ -39,6 +39,7 @@ ul, li , h2{
 .watch-button.active {
     color: blue;
     border-bottom: 0.07rem solid blue;
+    background-color: var(--color-background-blue);
 }
 
 .watchlist-control-settings {

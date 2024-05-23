@@ -67,9 +67,15 @@ const Account = () => {
                 navigate('/login');
             }
         }
+        localStorage.removeItem('token');
+        localStorage.removeItem('chart_stock');
+        localStorage.removeItem('chart_tf');
     };
 
     const handleDeleteUser = async () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('chart_stock');
+        localStorage.removeItem('chart_tf');
         const token = localStorage.getItem('token');
         const response = await axios.post(BackendLink.deleteuser, {token : token});
         console.log(response.data);

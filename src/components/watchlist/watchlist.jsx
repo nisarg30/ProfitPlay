@@ -14,7 +14,7 @@ const Watchlist = () => {
                 <div className="watchlist-content">
                     <div className="watchlist-list">
                         <div className="watch-img-container">
-                            <div style={{ margin : "auto", width : '16rem'}}>No watchlist found. reate New Watchlist Using + Button Above.</div>
+                            <div style={{ margin : "auto", width : '16rem'}}>No watchlist found. Create New Watchlist Using + Button Above.</div>
                         </div>
                     </div>
                 </div>

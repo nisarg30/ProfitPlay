@@ -166,7 +166,7 @@ const WatchControl = () => {
             })}
 
                 <li className="watchlist-control-item">
-                    <button className="watch-button" onClick={handleAddButtonClick}>
+                    <button className="watch-button" onClick={handleAddButtonClick} style={{ backgroundColor : 'var(--color-text-blue)', color : '#ffffff'}}>
                         <Tooltip title="Add watchlist" arrow>
                             <AddIcon style={{ display: 'flex', fontSize: '1rem' }} />
                         </Tooltip>
