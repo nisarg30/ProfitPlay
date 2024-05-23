@@ -102,7 +102,7 @@ const StockChart = () => {
     }, [symbol, timeFrame]);
     
     function xyz() {
-        const socket = io('http://localhost:3001',{
+        const socket = io('http://localhost:4001',{
             query: {
                 stockname: symbol,
                 timeframe: timeFrame

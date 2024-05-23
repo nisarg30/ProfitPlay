@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default async function fetchStockData(symbol, timeFrame) {
     try {
-        const apiUrl = `http://localhost:3001/api/stockData/${symbol}/${timeFrame}`;
+        const apiUrl = `http://localhost:4001/api/stockData/${symbol}/${timeFrame}`;
         const response = await axios.get(apiUrl);
         const convertedData = response.data.reverse().map(dataPoint => ([
             (dataPoint.time + 19800) * 1000,  // Assuming 'time' is in seconds, convert to milliseconds
