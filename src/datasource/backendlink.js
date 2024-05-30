@@ -1,3 +1,30 @@
+// var BackendLink={
+//     login : "https://cyborg0.onrender.com/",
+//     reg   : "https://cyborg0.onrender.com/reg",
+//     jwt   : "https://cyborg0.onrender.com/jwt",
+//     data  : "https://cyborg0.onrender.com/data",
+//     market : "https://cyborg0.onrender.com/market",
+//     limit : "https://cyborg0.onrender.com/limit",
+//     deleteuser : "https://cyborg0.onrender.com/deleteuser",
+//     resetuser : "https://cyborg0.onrender.com/resetuser",
+//     addstocktowatchlist : "https://cyborg0.onrender.com/addstocktowatchlist",
+//     addwatchlist : "https://cyborg0.onrender.com/addwatchlist",
+//     deletewatchlist : "https://cyborg0.onrender.com/deletewatchlist",
+//     deletestock : "https://cyborg0.onrender.com/deletestock",
+//     portfolio : "https://cyborg0.onrender.com/portfolio",
+//     positions : "https://cyborg0.onrender.com/positions",
+//     orderHistory : "https://cyborg0.onrender.com/orderhistory",
+//     openorders : "https://cyborg0.onrender.com/openorders",
+//     account : "https://cyborg0.onrender.com/account",
+//     deliveryfetch : "https://cyborg0.onrender.com/deliveryfetch",
+//     intradayfetch : "https://cyborg0.onrender.com/intradayfetch",
+//     geneserve : "https://cyborg0-1.onrender.com/general",
+//     authserve : "https://cyborg0-1.onrender.com/auth",
+//     resetuser : "https://cyborg0.onrender.com/resetuser",
+//     deleteuser : "https://cyborg0.onrender.com/deleteuser"
+// };
+// export default BackendLink;
+
 var BackendLink={
     login : "http://localhost:4000/",
     reg   : "http://localhost:4000/reg",

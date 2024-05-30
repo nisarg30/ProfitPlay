@@ -17,6 +17,7 @@
     "axios": "^1.5.1",
     "clsx": "^2.1.0",
     "highcharts": "^11.4.1",
+    "highcharts-custom-events": "^3.0.10",
     "highcharts-react-official": "^3.2.1",
     "moment": "^2.29.4",
     "os-browserify": "^0.3.0",

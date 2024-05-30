@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export default async function fetchStockData(symbol, timeFrame) {
+export async function fetchStockData(symbol, timeFrame) {
     try {
-        const apiUrl = `http://localhost:4001/api/stockData/${symbol}/${timeFrame}`;
+        const apiUrl = `http://localhost:4002/api/stockData/${symbol}/${timeFrame}`;
         const response = await axios.get(apiUrl);
         const convertedData = response.data.reverse().map(dataPoint => ([
-            (dataPoint.time + 19800) * 1000,  // Assuming 'time' is in seconds, convert to milliseconds
+            (dataPoint.time + 19800) * 1000,  
             dataPoint.open,
             dataPoint.max,
             dataPoint.min,
@@ -17,8 +17,36 @@ export default async function fetchStockData(symbol, timeFrame) {
             dataPoint.volume,
         ]));
 
+        console.log('fetch success');
+
         return { 'convert':convertedData, 'vol' : volumeData };
     } catch (error) {
         console.log(error);
     }
 }
+
+export async function fetchStockDatatime(symbol, timeFrame, time=null) {
+    try {
+        const apiUrl = `http://localhost:4002/api/stockData/${symbol}/${timeFrame}/${time}`;
+        const response = await axios.get(apiUrl);
+        const convertedData = response.data.reverse().map(dataPoint => ([
+            (dataPoint.time + 19800) * 1000,  
+            dataPoint.open,
+            dataPoint.max,
+            dataPoint.min,
+            dataPoint.close,
+        ]));
+
+        const volumeData = response.data.map(dataPoint => ([
+            (dataPoint.time + 19800) * 1000,
+            dataPoint.volume,
+        ]));
+
+        console.log('fetch success');
+
+        return { 'convert':convertedData, 'vol' : volumeData };
+    } catch (error) {
+        console.log(error);
+    }
+}
+
