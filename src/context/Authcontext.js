@@ -83,7 +83,7 @@ export const AuthorizationProvider = ({ children }) => {
     useEffect(() => { 
         const token = localStorage.getItem('token');
         if(!socket && isLoggedIn && token && watchlists.length > 0) {
-            const newSocket = io('http://localhost:4002/auth', {
+            const newSocket = io(BackendLink.authserve, {
                 auth: { token: token },
                 autoConnect: true,
                 reconnection: true,

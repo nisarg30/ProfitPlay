@@ -1,6 +1,6 @@
 import './chart.css';
 import React, { useEffect, useState, useRef } from 'react';
-import Highcharts, { chart } from "highcharts/highstock";
+import Highcharts from "highcharts/highstock";
 
 import indicatorsAll from "highcharts/indicators/indicators-all";
 import annotationsAdvanced from "highcharts/modules/annotations-advanced";
