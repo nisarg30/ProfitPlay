@@ -2,7 +2,7 @@ var BackendLink={
     login : "https://cyborg0.onrender.com/",
     reg   : "https://cyborg0.onrender.com/reg",
     jwt   : "https://cyborg0.onrender.com/jwt",
-    data  : "https://cyborg0.onrender.com/data",
+    data  : "https://cyborg0-1.onrender.com/data",
     market : "https://cyborg0.onrender.com/market",
     limit : "https://cyborg0.onrender.com/limit",
     deleteuser : "https://cyborg0.onrender.com/deleteuser",
@@ -20,8 +20,6 @@ var BackendLink={
     intradayfetch : "https://cyborg0.onrender.com/intradayfetch",
     geneserve : "https://cyborg0-1.onrender.com/general",
     authserve : "https://cyborg0-1.onrender.com/auth",
-    resetuser : "https://cyborg0.onrender.com/resetuser",
-    deleteuser : "https://cyborg0.onrender.com/deleteuser"
 };
 export default BackendLink;
 
