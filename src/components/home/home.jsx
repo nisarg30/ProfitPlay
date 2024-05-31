@@ -7,7 +7,7 @@ function Home() {
   const history = useNavigate();
 
   const redirect = () => {
-    history.push('/login');
+    history('/login');
   }
   return (
     <div className="App">
