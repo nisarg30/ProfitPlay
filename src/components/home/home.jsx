@@ -1,7 +1,14 @@
 import React from 'react';
 import './home.css'; // CSS file for styling
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+
+  const history = useNavigate();
+
+  const redirect = () => {
+    history.push('/login');
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -10,7 +17,7 @@ function Home() {
           <p className="subtitle">Your Gateway to Simulated Stock Trading</p>
           <div className="buttons-container">
             <button className="btn">Getting Started</button>
-            <button className="btn">Home</button>
+            <button className="btn" onClick={redirect}>Login</button>
             <button className="btn">Contact Us</button>
           </div>
         </div>
