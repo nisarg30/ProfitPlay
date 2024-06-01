@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function fetchStockData(symbol, timeFrame) {
     try {
-        const apiUrl = `https://cyb-front.onrender.com/api/stockData/${symbol}/${timeFrame}`;
+        const apiUrl = `https://cyborg0-1.onrender.com/api/stockData/${symbol}/${timeFrame}`;
         const response = await axios.get(apiUrl);
         const convertedData = response.data.reverse().map(dataPoint => ([
             (dataPoint.time + 19800) * 1000,  
@@ -27,7 +27,7 @@ export async function fetchStockData(symbol, timeFrame) {
 
 export async function fetchStockDatatime(symbol, timeFrame, time=null) {
     try {
-        const apiUrl = `https://cyb-front.onrender.com/stockData/${symbol}/${timeFrame}/${time}`;
+        const apiUrl = `https://cyborg0-1.onrender.com/api/stockData/${symbol}/${timeFrame}/${time}`;
         const response = await axios.get(apiUrl);
         const convertedData = response.data.reverse().map(dataPoint => ([
             (dataPoint.time + 19800) * 1000,  

@@ -1,14 +1,15 @@
-import './App.css';
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PortfolioPage from './pages/portfolio';
-import Orders from './pages/orders';
-import Accounts from './pages/Account.js';
-import StockChart from "./components/chart/chart.jsx"
-import Login from './components/login/login.jsx';
 import { AuthorizationProvider } from './context/Authcontext.js';
 import { WebSocketProvider } from './context/WebSocketCOntext.js';
-import Home from './components/home/home.jsx';
+import './App.css';
+
+const PortfolioPage = lazy(() => import('./pages/portfolio'));
+const Orders = lazy(() => import('./pages/orders'));
+const Accounts = lazy(() => import('./pages/Account.js'));
+const StockChart = lazy(() => import("./components/chart/chart.jsx"));
+const Login = lazy(() => import('./components/login/login.jsx'));
+const Home = lazy(() => import('./components/home/home.jsx'));
 
 function App() {
   return (
@@ -16,14 +17,16 @@ function App() {
       <BrowserRouter>
         <WebSocketProvider>
           <AuthorizationProvider>
-            <Routes>
-              <Route path="/" element={<Home/>} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/portfolio" element={<PortfolioPage />} />
-              <Route path="/accounts" element={<Accounts />} />
-              <Route path="/charts" element={<StockChart/>} />
-            </Routes>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/portfolio" element={<PortfolioPage />} />
+                <Route path="/accounts" element={<Accounts />} />
+                <Route path="/charts" element={<StockChart />} />
+              </Routes>
+            </Suspense>
           </AuthorizationProvider>
         </WebSocketProvider>
       </BrowserRouter>
