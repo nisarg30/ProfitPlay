@@ -72,7 +72,7 @@ const SearchBar = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.post(BackendLink.data, { msg: "send data" });
+            const response = await axios.get(BackendLink.data);
             setData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
