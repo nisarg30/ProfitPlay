@@ -4,7 +4,6 @@ import { AuthorizationProvider } from './context/Authcontext.js';
 import { WebSocketProvider } from './context/WebSocketCOntext.js';
 import './App.css';
 
-
 const PortfolioPage = lazy(() => import('./pages/portfolio'));
 const Orders = lazy(() => import('./pages/orders'));
 const Accounts = lazy(() => import('./pages/Account.js'));
@@ -16,20 +15,27 @@ function App() {
   return (
     <div className='App' style={{ backgroundColor: 'var(--color-background-grey)', height: '100vh', width: '100vw' }}>
       <BrowserRouter>
-        <WebSocketProvider>
-          <AuthorizationProvider>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/portfolio" element={<PortfolioPage />} />
-                <Route path="/accounts" element={<Accounts />} />
-                <Route path="/charts" element={<StockChart />} />
-              </Routes>
-            </Suspense>
-          </AuthorizationProvider>
-        </WebSocketProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="*"
+            element={
+              <WebSocketProvider>
+                <AuthorizationProvider>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Routes>
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/orders" element={<Orders />} />
+                      <Route path="/portfolio" element={<PortfolioPage />} />
+                      <Route path="/accounts" element={<Accounts />} />
+                      <Route path="/charts" element={<StockChart />} />
+                    </Routes>
+                  </Suspense>
+                </AuthorizationProvider>
+              </WebSocketProvider>
+            }
+          />
+        </Routes>
       </BrowserRouter>
     </div>
   );
