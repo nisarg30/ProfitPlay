@@ -4,6 +4,7 @@ import { AuthorizationProvider } from './context/Authcontext.js';
 import { WebSocketProvider } from './context/WebSocketCOntext.js';
 import './App.css';
 
+
 const PortfolioPage = lazy(() => import('./pages/portfolio'));
 const Orders = lazy(() => import('./pages/orders'));
 const Accounts = lazy(() => import('./pages/Account.js'));

@@ -2,90 +2,73 @@ import React from 'react';
 import './home.css'; // CSS file for styling
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
+const Homey = () => {
 
   const history = useNavigate();
 
-  const redirect = () => {
+  const redirectToLogin = () => {
     history('/login');
   }
+
+  const redirectToSignup = () => {
+    history('/signup');
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="header-content">
-          <h1 className="title">Welcome to Cyborg0</h1>
-          <p className="subtitle">Your Gateway to Simulated Stock Trading</p>
-          <div className="buttons-container">
-            <button className="btn">Getting Started</button>
-            <button className="btn" onClick={redirect}>Login</button>
-            <button className="btn">Contact Us</button>
-          </div>
-        </div>
-      </header>
+    <div className="homepage">
+      <div className="header">
+        <img src="./download.png" alt="LOGO" className="logos" />
+        <p>ProfitPlay</p>
+        <nav>
+          <button onClick={() => history('/')}>Home</button>
+          <button onClick={() => history('/about')}>About</button>
+          <button onClick={() => history('/features')}>Features</button>
+          <button onClick={() => history('/contact')}>Contact</button>
+          <button onClick={redirectToLogin}>Sign In</button>
+          <button onClick={redirectToSignup}>Sign Up</button>
+        </nav>
+      </div>
 
-      <section className="about-section">
-        <div className="about-content">
-          <h2>About Cyborg0</h2>
-          <p>
-            Cyborg0 is an advanced stock trading simulator designed specifically for the NSE (National Stock Exchange)
-            stocks in India. With our platform, you can simulate trading strategies, test your skills, and learn the
-            ins and outs of stock trading without risking real money.
-          </p>
-          <div className="image-container">
-            <img src="about-image.jpg" alt="About Cyborg0" className="section-image" />
-          </div>
+      <div className="intro-section" style={{ display : 'flex' }}>
+        <div>
+          <h2>Welcome to ProfitPlay</h2>
+          <p>ProfitPlay is the ultimate stock trading simulator where you can learn and master trading skills without any financial risk.</p>
         </div>
-      </section>
+        <img src="/project2.jpg" alt="Stock Trading Simulator" className="intro-image" style={{ marginLeft : 'auto' }}/>
+      </div>
 
-      <section className="features-section">
-        <div className="features-content">
-          <h2>Key Features</h2>
-          <ul>
-            <li>Real-time stock data</li>
-            <li>Virtual portfolio management</li>
-            <li>Advanced charting tools</li>
-            <li>Simulation of trading strategies</li>
-            <li>Comprehensive stock analysis</li>
-          </ul>
-          <div className="image-container">
-            <img src="features-image.jpg" alt="Key Features" className="section-image" />
-          </div>
+      <div className="features-section">
+        <h2>Features</h2>
+        <div className="feature">
+          <h3>Real-Time Market Data</h3>
+          <p>Get access to real-time market data to simulate trades with live prices.</p>
         </div>
-      </section>
-
-      <section className="testimonial-section">
-        <div className="testimonial-content">
-          <h2>What Our Users Say</h2>
-          <div className="testimonial">
-            <p>"Cyborg0 helped me understand the stock market better and improve my trading skills."</p>
-            <p className="author">- John Doe</p>
-          </div>
-          <div className="testimonial">
-            <p>"I love the intuitive interface and powerful features of Cyborg0. Highly recommended!"</p>
-            <p className="author">- Jane Smith</p>
-          </div>
-          <div className="image-container">
-            <img src="testimonial-image.jpg" alt="Testimonials" className="section-image" />
-          </div>
+        <div className="feature">
+          <h3>Practice Trading</h3>
+          <p>Practice your trading strategies in a risk-free environment.</p>
         </div>
-      </section>
-
-      <section className="contact-section">
-        <div className="contact-content">
-          <h2>Contact Us</h2>
-          <p>If you have any questions or feedback, feel free to reach out to us.</p>
-          <button className="btn contact-btn">Contact Now</button>
-          <div className="image-container">
-            <img src="contact-image.jpg" alt="Contact Us" className="section-image" />
-          </div>
+        <div className="feature">
+          <h3>Comprehensive Analytics</h3>
+          <p>Analyze your trading performance with detailed reports and analytics.</p>
         </div>
-      </section>
+        <div className="feature">
+          <h3>Community and Forums</h3>
+          <p>Join our community to discuss strategies and share insights with other traders.</p>
+        </div>
+        <div className="feature">
+          <h3>Educational Resources</h3>
+          <p>Access a wide range of educational resources to improve your trading skills.</p>
+        </div>
+      </div>
 
-      <footer className="footer">
-        <p>&copy; 2024 Cyborg0. All rights reserved.</p>
-      </footer>
+      <div className="contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: support@profitplay.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Address: 123 Finance Street, Money City, Wealth Country</p>
+      </div>
     </div>
   );
 }
 
-export default Home;
+export default Homey;

@@ -9,6 +9,34 @@
     background-color: #ffffff;
 }
 
+.open-orders-container {
+    font-size: 0.8rem;
+    height : calc(100vh - 6.2rem);
+    width : calc(100vw - 18rem);
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.image-cont {
+    display: grid;
+}
+
+.image-cont img {
+    width: 15rem;
+    align-self: center;
+    justify-self: center;
+    height: 15rem;
+    margin-top: 10%;
+}
+
+.image-cont p {
+    align-self: center;
+    justify-self: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+
 .overflow-cont {
     height : calc(100vh - 4.2rem);
     width : calc(100vw - 18rem);
