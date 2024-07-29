@@ -102,20 +102,26 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Screenshots
 
-![Login Page](screenshots/login.png)
+![Login Page](public/Screenshot%20from%202024-07-29%2019-22-07.png)
 *Login Page*
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](public/acc.png)
 *Dashboard*
 
-![Trading Simulator](screenshots/trading_simulator.png)
-*Trading Simulator*
+![Portfolio](public/portfolio.png)
+*Portfolio*
+
+![Orders](public/order.png)
+*Orders*
+
+![Charts](public/cha.png)
+*Charts*
 
 ## Contact
 
 For any inquiries or feedback, please contact:
 - **Email**: nisargpatel0466@gmail.com
-- **GitHub**: nisarg30(https://github.com/your-username)
+- **GitHub**: nisarg30(https://github.com/nisarg30)
 
 ---
 
