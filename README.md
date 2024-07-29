@@ -1,4 +1,6 @@
-# ProfitPlay
+<img src="public/download.png" alt="ProfitPlay Icon" width="60" height="60"> 
+
+## ProfitPlay
 
 ![GitHub stars](https://img.shields.io/github/stars/nisarg30/profitplay)
 ![GitHub forks](https://img.shields.io/github/forks/nisarg30/profitplay)
@@ -7,6 +9,12 @@
 ![Contributors](https://img.shields.io/github/contributors/nisarg30/profitplay)
 
 ProfitPlay is a comprehensive NSE trading simulator built using React, Material Design, Redux, HTML, CSS, JavaScript, and Highcharts. This application allows users to simulate stock trading and visualize their portfolio performance over time.
+
+## Live Site
+
+🚀 Check out the live version of ProfitPlay at [https://profitplay.onrender.com/](https://profitplay.onrender.com/).
+
+Feel free to explore and experience the NSE trading simulation in action!
 
 ## Table of Contents
 
